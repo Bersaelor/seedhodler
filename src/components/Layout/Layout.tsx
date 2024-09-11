@@ -4,7 +4,7 @@ import { Link, Outlet } from "react-router-dom"
 import InfoRed from "src/assets/icons/InfoRed.svg"
 
 import Logo from "src/assets/icons/Logo.svg"
-import QuestionMarkIcon from "src/assets/icons/QuestionMark.svg"
+import QuestionMarkIcon from "src/assets/icons/QuestionMark.svg?react"
 import { CheckmarkInfo } from "src/components/CheckmarkInfo"
 import { NavFeaturedCard } from "src/components/_NavFeaturedCard"
 
