@@ -1,7 +1,7 @@
 import React from "react"
 import Select, { OnChangeValue } from "react-select"
 
-import variables from "styles/Variables.module.scss"
+import variables from "src/styles/Variables.module.scss"
 
 type Props = {
   defaultValue: string

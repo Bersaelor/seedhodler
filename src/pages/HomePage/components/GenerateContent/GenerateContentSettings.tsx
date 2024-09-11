@@ -1,11 +1,10 @@
 import React, { Dispatch, SetStateAction } from "react"
 
-import { BadgeTitle } from "components/BadgeTitle"
-import { Select } from "components/Select"
-import { Switch } from "components/Switch"
-import { InfoTitle } from "components/InfoTitle"
-import { BadgeColorsEnum, langOptions, wordCountOptions } from "constants/index"
-import InfoGrayIcon from "assets/icons/InfoGray.svg"
+import InfoGrayIcon from "src/assets/icons/InfoGray.svg"
+import { BadgeTitle } from "src/components/BadgeTitle"
+import { Select } from "src/components/Select"
+import { Switch } from "src/components/Switch"
+import { BadgeColorsEnum, langOptions, wordCountOptions } from "src/constants/index"
 
 import classes from "./GenerateContent.module.scss"
 

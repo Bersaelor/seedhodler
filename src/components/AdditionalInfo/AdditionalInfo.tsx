@@ -1,7 +1,7 @@
-import React from "react"
 import CSS from "csstype"
+import React from "react"
 
-import { BadgeColorsEnum, badgeColorsObj } from "constants/index"
+import { BadgeColorsEnum, badgeColorsObj } from "src/constants/index"
 
 import classes from "./AdditionalInfo.module.scss"
 

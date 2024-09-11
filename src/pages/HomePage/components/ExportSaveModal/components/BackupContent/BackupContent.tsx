@@ -1,17 +1,17 @@
-import React, { useEffect, useRef, Dispatch, SetStateAction } from "react"
+import React, { Dispatch, SetStateAction, useEffect, useRef } from "react"
 
-import ArrowRightIcon from "assets/icons/ArrowRight.svg"
-import ArrowLeftIcon from "assets/icons/ArrowLeft.svg"
-import LogoIcon from "assets/icons/Logo.svg"
+import ArrowLeftIcon from "src/assets/icons/ArrowLeft.svg"
+import ArrowRightIcon from "src/assets/icons/ArrowRight.svg"
+import LogoIcon from "src/assets/icons/Logo.svg"
 
-import { Button } from "components/Button"
-import { ShareHeader } from "components/ShareHeader"
-import { TextPlace } from "components/TextPlace"
-import { NavigationEnum } from "constants/"
+import { Button } from "src/components/Button"
+import { ShareHeader } from "src/components/ShareHeader"
+import { TextPlace } from "src/components/TextPlace"
+import { NavigationEnum } from "src/constants/"
 
+import { AdditionalInfo } from "src/components/AdditionalInfo"
+import { InputWrapper } from "src/components/InputWrapper"
 import classes from "../../ExportSaveModal.module.scss"
-import { InputWrapper } from "components/InputWrapper"
-import { AdditionalInfo } from "components/AdditionalInfo"
 
 type Props = {
   shares: string[]

@@ -1,7 +1,7 @@
-import React, { Dispatch, SetStateAction, ChangeEvent } from "react"
 import CSS from "csstype"
+import React, { ChangeEvent, Dispatch, SetStateAction } from "react"
 
-import { getEntropyDetails } from "helpers"
+import { getEntropyDetails } from "src/helpers"
 
 import classes from "./Textarea.module.scss"
 

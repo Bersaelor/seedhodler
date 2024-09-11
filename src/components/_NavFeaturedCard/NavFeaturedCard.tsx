@@ -1,7 +1,7 @@
 import React, { Dispatch, SetStateAction } from "react"
 
-import { HelpModalTabs } from "constants/"
-import classes from "./NavFeaturedCard.module.scss"
+import { HelpModalTabs } from "src/constants"
+import classes from "./NavFeaturedCard.module.scss/"
 
 type Props = {
   setIsActive: Dispatch<SetStateAction<boolean>>

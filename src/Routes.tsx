@@ -1,9 +1,9 @@
 import React, { Dispatch, SetStateAction } from "react"
 import { Navigate, Route, Routes as RouterDomRoutes } from "react-router-dom"
 
-import { Layout } from "components/Layout"
-import { HomePage } from "pages/HomePage"
-import { PrintPage } from "pages/PrintPage"
+import { Layout } from "src/components/Layout"
+import { HomePage } from "src/pages/HomePage"
+import { PrintPage } from "src/pages/PrintPage"
 
 type Props = {
   isOnline: boolean

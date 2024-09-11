@@ -1,10 +1,10 @@
-import React, { useState, useContext, useEffect } from "react"
+import React, { useContext, useEffect, useState } from "react"
 
-import GenerateIcon from "assets/icons/GenerateWithBg.svg"
-import RestoreIcon from "assets/icons/RestoreWithBg.svg"
-import { RestoreContext } from "context/restoreContext"
-import { GenerateContext } from "context/generateContext"
-import { generateMnemonicFromEntropy, restoreMnemonic, validateMnemonic } from "helpers"
+import GenerateIcon from "src/assets/icons/GenerateWithBg.svg"
+import RestoreIcon from "src/assets/icons/RestoreWithBg.svg"
+import { GenerateContext } from "src/context/generateContext"
+import { RestoreContext } from "src/context/restoreContext"
+import { generateMnemonicFromEntropy, restoreMnemonic, validateMnemonic } from "src/helpers"
 
 import { GenerateContent } from "./components/GenerateContent"
 import { RestoreContent } from "./components/RestoreContent"

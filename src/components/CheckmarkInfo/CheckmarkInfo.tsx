@@ -1,8 +1,8 @@
-import React from "react"
 import CSS from "csstype"
+import React from "react"
 
-import CheckmarkIcon from "assets/icons/Checkmark.svg"
-import CheckmarkFilledIcon from "assets/icons/CheckmarkFilled.svg"
+import CheckmarkIcon from "src/assets/icons/Checkmark.svg"
+import CheckmarkFilledIcon from "src/assets/icons/CheckmarkFilled.svg"
 
 import classes from "./CheckmarkInfo.module.scss"
 

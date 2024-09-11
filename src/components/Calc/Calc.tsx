@@ -1,7 +1,7 @@
 import React from "react"
 
-import AddIcon from "assets/icons/Add.svg"
-import RemoveIcon from "assets/icons/Remove.svg"
+import AddIcon from "src/assets/icons/Add.svg"
+import RemoveIcon from "src/assets/icons/Remove.svg"
 
 import classes from "./Calc.module.scss"
 

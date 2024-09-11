@@ -1,5 +1,5 @@
-import { slip39wordlist, OPTIONS_NUMBER } from "constants/index"
-import { getRandomInt, getUniqueArr } from "helpers"
+import { OPTIONS_NUMBER, slip39wordlist } from "src/constants/index"
+import { getRandomInt, getUniqueArr } from "src/helpers"
 
 export const getOptions = (idsToPaste: number[]) => {
   const ids = getUniqueArr(0, slip39wordlist.length - 1, OPTIONS_NUMBER)

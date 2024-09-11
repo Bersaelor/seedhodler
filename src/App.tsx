@@ -1,11 +1,11 @@
-import React, { useState, useEffect } from "react"
+import React, { useEffect, useState } from "react"
 
 import { Detector } from "react-detect-offline"
-import Routes from "Routes"
-import { Notification } from "components/Notification"
-import { HelpModal } from "components/HelpModal"
-import { RestoreContextProvider } from "context/restoreContext"
-import { GenerateContextProvider } from "context/generateContext"
+import { HelpModal } from "src/components/HelpModal"
+import { Notification } from "src/components/Notification"
+import { GenerateContextProvider } from "src/context/generateContext"
+import { RestoreContextProvider } from "src/context/restoreContext"
+import Routes from "src/Routes"
 
 const App: React.FC = () => {
   const [isNotification, setIsNotification] = useState(false)

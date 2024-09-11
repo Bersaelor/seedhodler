@@ -1,13 +1,13 @@
+import { Document, Image, Page } from "@react-pdf/renderer"
 import React from "react"
-import { Document, Page, Image } from "@react-pdf/renderer"
 
-import Share33_2 from "assets/pdf/Share33-2.png"
-import Share33_1 from "assets/pdf/Share33-1.png"
-import Share20_2 from "assets/pdf/Share20-2.png"
-import Share20_1 from "assets/pdf/Share20-1.png"
+import Share20_1 from "src/assets/pdf/Share20-1.png"
+import Share20_2 from "src/assets/pdf/Share20-2.png"
+import Share33_1 from "src/assets/pdf/Share33-1.png"
+import Share33_2 from "src/assets/pdf/Share33-2.png"
 
-import Seedhodler12_2 from "assets/pdf/Seedhodler12-2.png"
-import Seedhodler24_2 from "assets/pdf/Seedhodler24-2.png"
+import Seedhodler12_2 from "src/assets/pdf/Seedhodler12-2.png"
+import Seedhodler24_2 from "src/assets/pdf/Seedhodler24-2.png"
 
 type Props = {
   selectedWordCount: number

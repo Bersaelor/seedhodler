@@ -1,11 +1,11 @@
 import React, { useContext } from "react"
 
-import { Button } from "components/Button"
-import { GenerateContext } from "context/generateContext"
+import { Button } from "src/components/Button"
+import { GenerateContext } from "src/context/generateContext"
 
+import classes from "./GenerateContent.module.scss"
 import { GenerateContentAdvanced } from "./GenerateContentAdvanced"
 import { GenerateContentSettings } from "./GenerateContentSettings"
-import classes from "./GenerateContent.module.scss"
 import { GenerateContentShares } from "./GenerateContentShares"
 
 const GenerateContent: React.FC = () => {
