@@ -3,20 +3,19 @@ import { defineConfig } from "vite"
 import { nodePolyfills } from 'vite-plugin-node-polyfills'
 import svgr from "vite-plugin-svgr"
 
-export default defineConfig(() => {
-  return {
-    build: {
-      outDir: "build",
+export default defineConfig(() => ({
+  base: "./",
+  build: {
+    outDir: "build",
+  },
+  plugins: [
+    react(),
+    svgr(),
+    nodePolyfills()
+  ],
+  resolve: {
+    alias: {
+      src: "/src",
     },
-    plugins: [
-      react(),
-      svgr(),
-      nodePolyfills()
-    ],
-    resolve: {
-      alias: {
-        src: "/src",
-      },
-    },
-  }
-})
+  },
+}))
