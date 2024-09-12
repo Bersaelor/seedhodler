@@ -1,9 +1,9 @@
-import React, { Dispatch, SetStateAction } from "react"
+import React, { Dispatch, lazy, SetStateAction, Suspense } from "react"
 import { Navigate, Route, Routes as RouterDomRoutes } from "react-router-dom"
 
 import { Layout } from "src/components/Layout"
 import { HomePage } from "src/pages/HomePage"
-import { PrintPage } from "src/pages/PrintPage"
+const PrintPage = lazy(() => import("src/pages/PrintPage"))
 
 type Props = {
   isOnline: boolean
@@ -35,7 +35,7 @@ const Routes: React.FC<Props> = ({
         }
       >
         <Route index element={<HomePage />} />
-        <Route path="print" element={<PrintPage />} />
+        <Route path="print" element={<Suspense><PrintPage /></Suspense>} />
         <Route path="*" element={<Navigate to="/" />} />
       </Route>
     </RouterDomRoutes>

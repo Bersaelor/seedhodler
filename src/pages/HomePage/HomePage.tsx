@@ -1,4 +1,4 @@
-import React, { lazy, useContext, useEffect, useState } from "react"
+import React, { lazy, Suspense, useContext, useEffect, useState } from "react"
 
 import GenerateIcon from "src/assets/icons/GenerateWithBg.svg"
 import RestoreIcon from "src/assets/icons/RestoreWithBg.svg"
@@ -124,7 +124,9 @@ const HomePage: React.FC = () => {
         />
       </div>
       <div className={classes.tabContent}>
-        {activeTabId === 0 ? <GenerateContent /> : <RestoreContent />}
+        {activeTabId === 0 ? 
+        <Suspense><GenerateContent /></Suspense> :
+        <Suspense><RestoreContent /></Suspense>}
       </div>
     </>
   )

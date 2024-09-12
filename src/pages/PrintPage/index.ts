@@ -1,1 +1,2 @@
-export { default as PrintPage } from "./PrintPage"
+export { default } from "./PrintPage";
+
