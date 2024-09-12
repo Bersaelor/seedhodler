@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from "react"
+import React, { lazy, useContext, useEffect, useState } from "react"
 
 import GenerateIcon from "src/assets/icons/GenerateWithBg.svg"
 import RestoreIcon from "src/assets/icons/RestoreWithBg.svg"
@@ -6,10 +6,10 @@ import { GenerateContext } from "src/context/generateContext"
 import { RestoreContext } from "src/context/restoreContext"
 import { generateMnemonicFromEntropy, restoreMnemonic, validateMnemonic } from "src/helpers"
 
-import { GenerateContent } from "./components/GenerateContent"
-import { RestoreContent } from "./components/RestoreContent"
 import { Tab } from "./components/Tab"
 import classes from "./HomePage.module.scss"
+const GenerateContent = lazy(() => import("./components/GenerateContent"))
+const RestoreContent = lazy(() => import("./components/RestoreContent"))
 
 const HomePage: React.FC = () => {
   const [activeTabId, setActiveTabId] = useState(0)

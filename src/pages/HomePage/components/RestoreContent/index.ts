@@ -1,1 +1,2 @@
-export { default as RestoreContent } from "./RestoreContent"
+export { default } from "./RestoreContent";
+
