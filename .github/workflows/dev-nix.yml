@@ -1,8 +1,9 @@
 name: "Build seedhodler nix"
+
 on:
-  pull_request:
   push:
-  workflow_dispatch:
+    branches: 
+      - dev
 
 jobs:
 
