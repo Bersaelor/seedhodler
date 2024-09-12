@@ -1,13 +1,12 @@
-import React, { useState, useEffect, Dispatch, SetStateAction } from "react"
+import React, { Dispatch, SetStateAction, useEffect, useState } from "react"
 
-import { Modal } from "components/Modal"
-import { BadgeColorsEnum, CLOSED_WORDS_NUMBER, slip39wordlist } from "constants/index"
-import { getOptions, getUniqueArr } from "helpers"
+import { Modal } from "src/components/Modal"
+import { BadgeColorsEnum, CLOSED_WORDS_NUMBER, slip39wordlist } from "src/constants"
+import { getOptions, getUniqueArr } from "src/helpers/index"
 
-import { PrintContent } from "./components/PrintContent"
-import { VerificationContent } from "./components/VerificationContent"
 import { BackupContent } from "./components/BackupContent"
-//TODO remove component in future if its not nessesary
+import { PrintContent } from "./components/PrintContent"
+import { VerificationContent } from "./components/VerificationContent"; //TODO remove component in future if its not nessesary
 // import { SuccessContent } from "./components/SuccessContent"
 import { CompleteScreen } from "./components/CompleteScreen"
 

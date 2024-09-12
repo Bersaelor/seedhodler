@@ -1,11 +1,11 @@
 import React, { Dispatch, SetStateAction } from "react"
 
-import PrevIcon from "assets/icons/Prev.svg"
-import NextIcon from "assets/icons/Next.svg"
-import BinIcon from "assets/icons/Bin.svg"
-import { TextPlace } from "components/TextPlace"
-import { Button } from "components/Button"
-import { ButtonColorsEnum } from "constants/"
+import BinIcon from "src/assets/icons/Bin.svg"
+import NextIcon from "src/assets/icons/Next.svg"
+import PrevIcon from "src/assets/icons/Prev.svg"
+import { Button } from "src/components/Button"
+import { TextPlace } from "src/components/TextPlace"
+import { ButtonColorsEnum } from "src/constants/"
 
 import classes from "./Shares.module.scss"
 

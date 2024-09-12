@@ -1,8 +1,8 @@
-import React, { useState, useEffect, Dispatch, SetStateAction } from "react"
-import CSS from "csstype"
 import * as bip39 from "bip39"
+import CSS from "csstype"
+import React, { Dispatch, SetStateAction, useEffect, useState } from "react"
 
-import { slip39wordlist } from "constants/"
+import { slip39wordlist } from "src/constants/"
 
 import classes from "./Input.module.scss"
 

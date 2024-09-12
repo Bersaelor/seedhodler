@@ -1,7 +1,7 @@
-import React, { Dispatch, SetStateAction, useState, createContext } from "react"
+import React, { createContext, Dispatch, SetStateAction, useState } from "react"
 
-import { wordCountOptions } from "constants/"
-import { validateShare } from "helpers"
+import { wordCountOptions } from "src/constants/"
+import { validateShare } from "src/helpers"
 
 type Context = {
   selectedWordCount: string

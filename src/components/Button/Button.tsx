@@ -1,8 +1,8 @@
-import React from "react"
 import CSS from "csstype"
+import React from "react"
 
-import { ButtonColorsEnum } from "constants/index"
-import { Loader } from "components/Loader"
+import { Loader } from "src/components/Loader"
+import { ButtonColorsEnum } from "src/constants/index"
 
 import classes from "./Button.module.scss"
 

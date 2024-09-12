@@ -1,8 +1,8 @@
 import React, { Dispatch, SetStateAction } from "react"
 
-import CompleteIcon from "assets/icons/CompleteIcon.svg"
-import CompleteImage from "assets/icons/CompleteImg.png"
-import { Button } from "components/Button"
+import CompleteIcon from "src/assets/icons/CompleteIcon.svg"
+import CompleteImage from "src/assets/icons/CompleteImg.png"
+import { Button } from "src/components/Button"
 
 import classes from "./CompleteScreen.module.scss"
 

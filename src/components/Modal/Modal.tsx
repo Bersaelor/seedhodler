@@ -1,10 +1,9 @@
-import React, { useEffect, useRef, Dispatch, SetStateAction } from "react"
 import CSS from "csstype"
-import Confetti from "react-confetti"
+import React, { Dispatch, SetStateAction, useEffect, useRef } from "react"
 
-import CloseIcon from "assets/icons/Close.svg"
-import { BadgeTitle } from "components/BadgeTitle"
-import { BadgeColorsEnum } from "constants/index"
+import CloseIcon from "src/assets/icons/Close.svg"
+import { BadgeTitle } from "src/components/BadgeTitle"
+import { BadgeColorsEnum } from "src/constants/index"
 
 import classes from "./Modal.module.scss"
 

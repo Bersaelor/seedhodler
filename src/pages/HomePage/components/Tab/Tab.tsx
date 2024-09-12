@@ -1,6 +1,6 @@
 import React from "react"
 
-import InfoGrayIcon from "assets/icons/InfoGray.svg"
+import InfoGrayIcon from "src/assets/icons/InfoGray.svg"
 
 import classes from "./Tab.module.scss"
 

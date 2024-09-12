@@ -1,8 +1,8 @@
-import React from "react"
 import CSS from "csstype"
+import React from "react"
 
-import InfoGrayIcon from "assets/icons/InfoGray.svg"
-import InfoRedIcon from "assets/icons/InfoRed.svg"
+import InfoGrayIcon from "src/assets/icons/InfoGray.svg"
+import InfoRedIcon from "src/assets/icons/InfoRed.svg"
 
 import classes from "./InfoTitle.module.scss"
 

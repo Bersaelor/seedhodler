@@ -1,4 +1,4 @@
-import { parseBigInt } from "helpers/index"
+import { parseBigInt } from "src/helpers/index"
 
 export const getEntropyDetails = (entropyValue: string, minBits: number, entropyTypeId: number = 0) => {
   const regexVariants = {

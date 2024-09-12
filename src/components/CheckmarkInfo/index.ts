@@ -1,1 +1,2 @@
-export { default as CheckmarkInfo } from "./CheckmarkInfo"
+export { default } from "./CheckmarkInfo";
+

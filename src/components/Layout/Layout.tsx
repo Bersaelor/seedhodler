@@ -1,12 +1,12 @@
 import React, { Dispatch, SetStateAction } from "react"
-import { Outlet, Link } from "react-router-dom"
+import { Link, Outlet } from "react-router-dom"
 
-import InfoRed from "assets/icons/InfoRed.svg"
+import InfoRed from "src/assets/icons/InfoRed.svg"
 
-import { ReactComponent as QuestionMarkIcon } from "assets/icons/QuestionMark.svg"
-import Logo from "assets/icons/Logo.svg"
-import { CheckmarkInfo } from "components/CheckmarkInfo"
-import { NavFeaturedCard } from "components/_NavFeaturedCard"
+import Logo from "src/assets/icons/Logo.svg"
+import QuestionMarkIcon from "src/assets/icons/QuestionMark.svg?react"
+import CheckmarkInfo from "src/components/CheckmarkInfo"
+import { NavFeaturedCard } from "src/components/_NavFeaturedCard"
 
 import classes from "./Layout.module.scss"
 

@@ -1,13 +1,13 @@
 import React, { Dispatch, SetStateAction } from "react"
 
-import { BadgeColorsEnum } from "constants/index"
-import ArrowRightIcon from "assets/icons/ArrowRight.svg"
-import InternetRedIcon from "assets/icons/InternetRed.svg"
-import InternetGrayIcon from "assets/icons/InternetGray.svg"
-import CheckmarkFilledIcon from "assets/icons/CheckmarkFilled.svg"
-import { Modal } from "components/Modal"
-import { CheckmarkInfo } from "components/CheckmarkInfo"
-import { Button } from "components/Button"
+import ArrowRightIcon from "src/assets/icons/ArrowRight.svg"
+import CheckmarkFilledIcon from "src/assets/icons/CheckmarkFilled.svg"
+import InternetGrayIcon from "src/assets/icons/InternetGray.svg"
+import InternetRedIcon from "src/assets/icons/InternetRed.svg"
+import { Button } from "src/components/Button"
+import { CheckmarkInfo } from "src/components/CheckmarkInfo"
+import { Modal } from "src/components/Modal"
+import { BadgeColorsEnum } from "src/constants/index"
 
 import classes from "./ConnectionStatusModal.module.scss"
 

@@ -1,4 +1,4 @@
-import variables from "styles/Variables.module.scss"
+import variables from "src/styles/Variables.module.scss"
 
 export enum BadgeColorsEnum {
   Main,

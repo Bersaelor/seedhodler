@@ -1,18 +1,18 @@
-import React, { useState, Dispatch, SetStateAction } from "react"
+import React, { Dispatch, SetStateAction, useState } from "react"
 
-import LogoIcon from "assets/icons/Logo.svg"
-import PrintIcon from "assets/icons/Print.svg"
-import ArrowRightIcon from "assets/icons/ArrowRight.svg"
-import { AdditionalInfo } from "components/AdditionalInfo"
-import { Button } from "components/Button"
-import { TextPlace } from "components/TextPlace"
-import { ButtonColorsEnum } from "constants/index"
+import ArrowRightIcon from "src/assets/icons/ArrowRight.svg"
+import LogoIcon from "src/assets/icons/Logo.svg"
+import PrintIcon from "src/assets/icons/Print.svg"
+import { AdditionalInfo } from "src/components/AdditionalInfo"
+import { Button } from "src/components/Button"
+import { TextPlace } from "src/components/TextPlace"
+import { ButtonColorsEnum } from "src/constants/index"
 
-import classes from "../../ExportSaveModal.module.scss"
-import { PDFTemplate } from "components/PDFTemplate"
 import { pdf } from "@react-pdf/renderer"
+import { PDFTemplate } from "src/components/PDFTemplate"
+import classes from "../../ExportSaveModal.module.scss"
 
-import { InputWrapper } from "components/InputWrapper"
+import { InputWrapper } from "src/components/InputWrapper"
 
 type Props = {
   selectedWordCount: number

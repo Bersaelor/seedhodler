@@ -1,10 +1,10 @@
-import React, { useState, useEffect, Dispatch, SetStateAction } from "react"
+import React, { Dispatch, SetStateAction, useEffect, useState } from "react"
 
 import TabContent from "./components/TabContent"
 
-import { Modal } from "components/Modal"
-import { Button } from "components/Button"
-import { BadgeColorsEnum, HelpModalTabs, helpModalTabTexts, helpModalTabTitles } from "constants/"
+import { Button } from "src/components/Button"
+import { Modal } from "src/components/Modal"
+import { BadgeColorsEnum, HelpModalTabs, helpModalTabTexts, helpModalTabTitles } from "src/constants/"
 
 import classes from "./HelpModal.module.scss"
 

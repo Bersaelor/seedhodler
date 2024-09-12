@@ -1,15 +1,15 @@
 import React, { Dispatch, SetStateAction, useState } from "react"
 
-import { Calc } from "components/Calc"
-import { BadgeTitle } from "components/BadgeTitle"
-import { InfoTitle } from "components/InfoTitle"
-import { Button } from "components/Button"
-import { Input } from "components/Input"
-import { BadgeColorsEnum, ButtonColorsEnum } from "constants/index"
-import { useInputRefs } from "hooks"
+import { BadgeTitle } from "src/components/BadgeTitle"
+import { Button } from "src/components/Button"
+import { Calc } from "src/components/Calc"
+import { InfoTitle } from "src/components/InfoTitle"
+import { Input } from "src/components/Input"
+import { BadgeColorsEnum, ButtonColorsEnum } from "src/constants/index"
+import { useInputRefs } from "src/hooks"
 
-import { Shares } from "../Shares"
 import { ExportSaveModal } from "../ExportSaveModal"
+import { Shares } from "../Shares"
 import classes from "./GenerateContent.module.scss"
 
 type GenerateContentSharesProps = {

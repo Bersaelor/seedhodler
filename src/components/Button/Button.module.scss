@@ -1,4 +1,4 @@
-@import "styles/Variables.module.scss";
+@import "src/styles/Variables.module.scss";
 
 @mixin btnBase($color) {
   display: flex;
@@ -33,16 +33,22 @@
 .btnColorMain {
   @include btnBase($colorMain);
 }
+
 .btnColorSuccess {
   @include btnBase($colorSuccess);
 }
+
 .btnColorErrorLightish {
   @include btnBase($colorErrorLightish);
 }
+
 .btnColorNeutral {
   @include btnBase($colorBg100);
-  color: $colorTextDark;
-  border: 2px solid $colorBg300;
+
+  & {
+    color: $colorTextDark;
+    border: 2px solid $colorBg300;
+  }
 }
 
 .fullWidth {

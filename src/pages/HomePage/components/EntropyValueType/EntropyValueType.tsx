@@ -1,6 +1,6 @@
 import React from "react"
 
-import variables from "styles/Variables.module.scss"
+import variables from "src/styles/Variables.module.scss"
 
 import classes from "./EntropyValueType.module.scss"
 

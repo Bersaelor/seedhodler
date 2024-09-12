@@ -1,1 +1,2 @@
-export { default as GenerateContent } from "./GenerateContent"
+export { default } from "./GenerateContent";
+

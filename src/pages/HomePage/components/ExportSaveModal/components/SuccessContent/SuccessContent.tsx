@@ -1,8 +1,8 @@
 import React, { Dispatch, SetStateAction } from "react"
 
-import CongratsIcon from "assets/icons/Congrats.svg"
-import { Button } from "components/Button"
-import { Accordion } from "components/Accordion"
+import CongratsIcon from "src/assets/icons/Congrats.svg"
+import { Accordion } from "src/components/Accordion"
+import { Button } from "src/components/Button"
 
 import classes from "../../ExportSaveModal.module.scss"
 

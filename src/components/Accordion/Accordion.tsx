@@ -1,7 +1,7 @@
-import React, { useState, useEffect, useRef } from "react"
 import CSS from "csstype"
+import React, { useEffect, useRef, useState } from "react"
 
-import ArrowDownIcon from "assets/icons/ArrowDown.svg"
+import ArrowDownIcon from "src/assets/icons/ArrowDown.svg"
 
 import classes from "./Accordion.module.scss"
 

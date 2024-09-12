@@ -1,12 +1,12 @@
-import React, { useState, useRef, useEffect, Dispatch, SetStateAction } from "react"
+import React, { Dispatch, SetStateAction, useEffect, useRef, useState } from "react"
 
-import ArrowRightIcon from "assets/icons/ArrowRight.svg"
-import ArrowLeftIcon from "assets/icons/ArrowLeft.svg"
-import { ShareHeader } from "components/ShareHeader"
-import { TextPlace } from "components/TextPlace"
-import { Button } from "components/Button"
-import variables from "styles/Variables.module.scss"
-import { NavigationEnum } from "constants/"
+import ArrowLeftIcon from "src/assets/icons/ArrowLeft.svg"
+import ArrowRightIcon from "src/assets/icons/ArrowRight.svg"
+import { Button } from "src/components/Button"
+import { ShareHeader } from "src/components/ShareHeader"
+import { TextPlace } from "src/components/TextPlace"
+import { NavigationEnum } from "src/constants"
+import variables from "src/styles/Variables.module.scss/"
 
 import classes from "../../ExportSaveModal.module.scss"
 

@@ -2,9 +2,9 @@ import classes from "./InputWrapper.module.scss"
 
 import CSS from "csstype"
 
-import Link from "assets/icons/Link.svg"
-import Wallet from "assets/icons/Wallet.svg"
-import Password from "assets/icons/Password.svg"
+import Link from "src/assets/icons/Link.svg"
+import Password from "src/assets/icons/Password.svg"
+import Wallet from "src/assets/icons/Wallet.svg"
 
 type Props = {
   children: JSX.Element

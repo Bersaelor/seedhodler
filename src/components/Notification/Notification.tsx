@@ -1,7 +1,7 @@
 import React, { Dispatch, SetStateAction } from "react"
 
-import Screenshot from "assets/icons/Screenshot.svg"
-import { Modal } from "components/Modal"
+import Screenshot from "src/assets/icons/Screenshot.svg"
+import { Modal } from "src/components/Modal"
 
 import classes from "./Notification.module.scss"
 

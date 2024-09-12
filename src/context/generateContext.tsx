@@ -1,6 +1,6 @@
-import React, { Dispatch, SetStateAction, useState, createContext } from "react"
+import React, { createContext, Dispatch, SetStateAction, useState } from "react"
 
-import { wordCountOptions, langOptions } from "constants/"
+import { langOptions, wordCountOptions } from "src/constants/"
 import {
   generateMnemonic,
   generateMnemonicFromEntropy,
@@ -8,7 +8,7 @@ import {
   getFormattedShares,
   hexStringToByteArray,
   mnemonicToEntropy,
-} from "helpers"
+} from "src/helpers"
 
 type Context = {
   selectedLang: string

@@ -1,6 +1,6 @@
 import React, { useState } from "react"
 
-import { TextPlace } from "components/TextPlace"
+import { TextPlace } from "src/components/TextPlace"
 
 import classes from "./PrintPage.module.scss"
 
