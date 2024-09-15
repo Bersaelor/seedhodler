@@ -1,8 +1,6 @@
-import * as bip39 from "bip39"
 import CSS from "csstype"
 import React, { Dispatch, SetStateAction, useEffect, useState } from "react"
 
-import { slip39wordlist } from "src/constants/"
 
 import classes from "./Input.module.scss"
 
@@ -13,7 +11,7 @@ type Props = {
   onChange: Dispatch<SetStateAction<string[]>>
   onClick?: (index: number) => void
   onEnter: (index: number) => void
-  isRestore?: boolean
+  wordlist: string[]
   isError?: boolean
   className?: string
   containerStyle?: CSS.Properties
@@ -21,15 +19,18 @@ type Props = {
 
 const Input = React.forwardRef<HTMLInputElement, Props>(
   (
-    { count, index, value, onChange, onClick, onEnter, isRestore, isError, className, containerStyle },
+    { 
+      count, index, value, onChange, onClick, onEnter, 
+      wordlist, isError, className, containerStyle
+    },
     ref,
   ) => {
+
     const classNamesArr = [classes.input, className]
     if (isError) {
       classNamesArr.push(classes.error)
     }
     const classNames = classNamesArr.join(" ")
-    const wordlist = isRestore ? slip39wordlist : bip39.wordlists.english
     const [focusedItemId, setFocusedItemId] = useState(0)
     const variants: string[] = []
     const isOpen = value.length !== 0 && !wordlist.some(word => word === value)

@@ -11,6 +11,7 @@ import { RestoreContext } from "src/context/restoreContext"
 import { useInputRefs } from "src/hooks"
 import variables from "src/styles/Variables.module.scss"
 
+import { slip39wordlist } from "src/constants/"
 import { Shares } from "../Shares"
 import classes from "./RestoreContent.module.scss"
 
@@ -102,7 +103,7 @@ const RestoreContent: React.FC = () => {
             ref={inputRefs[index]}
             onEnter={onEnter}
             onClick={onClick}
-            isRestore={true}
+            wordlist={slip39wordlist}
             count={index + 1}
             index={index}
             value={word}

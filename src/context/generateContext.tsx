@@ -1,4 +1,4 @@
-import React, { createContext, Dispatch, SetStateAction, useState } from "react"
+import React, { createContext, Dispatch, SetStateAction, useEffect, useState } from "react"
 
 import { langOptions, wordCountOptions } from "src/constants/"
 import {
@@ -45,35 +45,35 @@ type Context = {
 
 export const GenerateContext = createContext<Context>({
   selectedLang: "english",
-  setSelectedLang: () => {},
+  setSelectedLang: () => { },
   selectedWordCount: "12",
-  setSelectedWordCount: () => {},
+  setSelectedWordCount: () => { },
   mnemonic12: [""],
-  setMnemonic12: () => {},
+  setMnemonic12: () => { },
   mnemonic24: [""],
-  setMnemonic24: () => {},
+  setMnemonic24: () => { },
   isAdvanced: false,
-  setIsAdvanced: () => {},
+  setIsAdvanced: () => { },
   entropyValue: "",
-  setEntropyValue: () => {},
+  setEntropyValue: () => { },
   shares12: null,
-  setShares12: () => {},
+  setShares12: () => { },
   shares24: null,
-  setShares24: () => {},
+  setShares24: () => { },
   activeShareItemId: 0,
-  setActiveShareItemId: () => {},
+  setActiveShareItemId: () => { },
   entropyTypeId: 0,
-  setEntropyTypeId: () => {},
+  setEntropyTypeId: () => { },
   minBits: 128,
   entropyToPass: "",
   thresholdNumber: 0,
-  setThresholdNumber: () => {},
+  setThresholdNumber: () => { },
   sharesNumber: 0,
-  setSharesNumber: () => {},
-  handleGenerateShares: () => {},
-  handleGeneratePhase: () => {},
+  setSharesNumber: () => { },
+  handleGenerateShares: () => { },
+  handleGeneratePhase: () => { },
   isValidMnemonic: true,
-  setIsValidMnemonic: () => {},
+  setIsValidMnemonic: () => { },
 })
 
 type ProviderProps = {
@@ -138,6 +138,12 @@ export const GenerateContextProvider: React.FC<ProviderProps> = ({ children }) =
       setShares24(shares)
     }
   }
+
+  // reset the mnemonic if the language changes
+  useEffect(() => {
+    setMnemonic12(new Array(12).fill(""))
+    setMnemonic24(new Array(24).fill(""))
+  }, [selectedLang])
 
   const contextValue = {
     selectedLang,
