@@ -23,7 +23,7 @@ function createWindow() {
   } else if (process.platform === 'darwin') {
     iconPath = path.join(__dirname, 'public/logo256_1024x1024_1024x1024.icns');
   } else {
-    iconPath = path.join(__dirname, 'public/logo192.png');
+    iconPath = path.join(__dirname, 'public/logo256.png');
   }
 
   // Create the browser window.
