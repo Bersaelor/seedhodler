@@ -18,13 +18,15 @@ module.exports = {
     {
       name: '@electron-forge/maker-deb',
       config: {
-        icon: '/public/logo256.png'
+        icon: './public/logo256.png',
+        maintainer: 'Konrad Feiler',
+        homepage: 'https://seedhodler.io',
       },
     },
     {
       name: '@electron-forge/maker-rpm',
       config: {
-        icon: '/public/logo256.png'
+        icon: './public/logo256.png'
       },
     },
   ],

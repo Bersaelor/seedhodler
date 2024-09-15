@@ -40,6 +40,8 @@ function createWindow() {
   //   mainWindow.loadFile('index.html')
   mainWindow.loadURL("http://localhost:" + PORT);
 
+  mainWindow.setMenu(null);
+
   // Open the DevTools.
   // mainWindow.webContents.openDevTools()
 }
