@@ -1,3 +1,4 @@
+import * as bip39 from "bip39"
 import React, { Dispatch, SetStateAction, useState } from "react"
 
 import { BadgeTitle } from "src/components/BadgeTitle"
@@ -13,6 +14,7 @@ import { Shares } from "../Shares"
 import classes from "./GenerateContent.module.scss"
 
 type GenerateContentSharesProps = {
+  selectedLang: string
   mnemonic: string[]
   shares: null | string[]
   selectedWordCount: string
@@ -28,6 +30,7 @@ type GenerateContentSharesProps = {
 }
 
 export const GenerateContentShares: React.FC<GenerateContentSharesProps> = ({
+  selectedLang,
   mnemonic,
   shares,
   selectedWordCount,
@@ -74,6 +77,7 @@ export const GenerateContentShares: React.FC<GenerateContentSharesProps> = ({
             index={index}
             value={word}
             onChange={setMnemonic}
+            wordlist={bip39.wordlists[selectedLang]}
             isError={!isValidMnemonic}
             containerStyle={{
               width: "49%",

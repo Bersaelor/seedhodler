@@ -68,6 +68,7 @@ const GenerateContent: React.FC = () => {
         </Button>
       )}
       <GenerateContentShares
+        selectedLang={selectedLang}
         mnemonic={mnemonic}
         shares={shares}
         selectedWordCount={selectedWordCount}
