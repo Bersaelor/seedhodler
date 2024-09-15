@@ -5,6 +5,10 @@ export const langOptions = [
   { value: "chinese_traditional", label: "Traditional Chinesse" },
   { value: "korean", label: "Korean" },
   { value: "french", label: "French" },
+  { value: "italian", label: "Italian" },
+  { value: "spanish", label: "Spanish" },
+  { value: "japanese", label: "Japanese" },
+  { value: "portuguese", label: "Portuguese" },
 ]
 
 export const wordCountOptions = [

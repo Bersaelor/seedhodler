@@ -141,7 +141,6 @@ export const GenerateContextProvider: React.FC<ProviderProps> = ({ children }) =
 
   // reset the mnemonic if the language changes
   useEffect(() => {
-    console.log("selectedLang changed ", selectedLang)
     setMnemonic12(new Array(12).fill(""))
     setMnemonic24(new Array(24).fill(""))
   }, [selectedLang])
