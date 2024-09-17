@@ -114,7 +114,10 @@ export const GenerateContextProvider: React.FC<ProviderProps> = ({ children }) =
     } else {
       mnemonic = generateMnemonicFromEntropy(selectedLang, entropyToPass)
     }
-    const mnemonicArr = mnemonic.split(" ")
+    // some languages use U+0020 (space) and some use U+3000 (ideographic space)
+    const blankspaces = [" ", "　"];
+    // split the mnemonic by either blankspace
+    const mnemonicArr = mnemonic.split(new RegExp(blankspaces.join("|"), "g"))
 
     if (is12words) {
       setMnemonic12(mnemonicArr)
