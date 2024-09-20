@@ -4,6 +4,7 @@
   "private": true,
   "homepage": "https://seedhodler.io/",
   "config-overrides-path": "src/config-overrides.js",
+  "type": "module",
   "dependencies": {
     "@react-pdf/renderer": "^3.4.4",
     "@testing-library/jest-dom": "^5.16.4",
