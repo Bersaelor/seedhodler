@@ -17,11 +17,11 @@ export const getFormattedShares = (
   return slipNode.fromPath("r/" + 0).mnemonics
 }
 
-export const restoreMnemonic = (shares: string[], passphrase = "") => {
+export const restoreMnemonic = (language: string, shares: string[], passphrase = "") => {
   try {
     const secret = slip39.recoverSecret(shares, passphrase)
     const entropy = Buffer.from(secret)
-    const mnemonic = entropyToMnemonic(entropy)
+    const mnemonic = entropyToMnemonic(language, entropy)
     return { mnemonic, error: false }
   } catch (err) {
     return { error: err instanceof Error ? err.message : "Unexpected error" }

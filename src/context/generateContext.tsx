@@ -1,13 +1,15 @@
-import React, { createContext, Dispatch, SetStateAction, useEffect, useState } from "react"
+import React, { createContext, Dispatch, SetStateAction, useEffect, useRef, useState } from "react"
 
 import { langOptions, wordCountOptions } from "src/constants/"
 import {
+  entropyToMnemonic,
   generateMnemonic,
   generateMnemonicFromEntropy,
   getEntropyDetails,
   getFormattedShares,
   hexStringToByteArray,
   mnemonicToEntropy,
+  validateMnemonic
 } from "src/helpers"
 
 type Context = {
@@ -132,7 +134,7 @@ export const GenerateContextProvider: React.FC<ProviderProps> = ({ children }) =
 
     const mnemonicStr = mnemonic.join(" ")
     const groups = [[thresholdNumber, sharesNumber]]
-    const masterSecret = hexStringToByteArray(mnemonicToEntropy(mnemonicStr))
+    const masterSecret = hexStringToByteArray(mnemonicToEntropy(selectedLang, mnemonicStr))
 
     const shares = getFormattedShares(masterSecret, "", 1, groups)
     if (is12words) {
@@ -142,10 +144,42 @@ export const GenerateContextProvider: React.FC<ProviderProps> = ({ children }) =
     }
   }
 
+  const prevSelectedLangRef = useRef(selectedLang);
+
   // reset the mnemonic if the language changes
   useEffect(() => {
-    setMnemonic12(new Array(12).fill(""))
-    setMnemonic24(new Array(24).fill(""))
+    const prevSelectedLang = prevSelectedLangRef.current;
+
+    if (!validateMnemonic(prevSelectedLang, mnemonic12.join(" ")) && !validateMnemonic(prevSelectedLang, mnemonic24.join(" "))) {
+      return
+    }
+
+    if (is12words) {
+      setShares12(null)
+    } else {
+      setShares24(null)
+    }
+    setActiveShareItemId(0)
+
+    const entropy = is12words ?
+      mnemonicToEntropy(prevSelectedLang, mnemonic12.join(" "))
+      : mnemonicToEntropy(prevSelectedLang, mnemonic24.join(" "))
+
+    const entropyBuffer = Buffer.from(entropy, "hex")
+    const mnemonic = entropyToMnemonic(selectedLang, entropyBuffer)
+
+    // some languages use U+0020 (space) and some use U+3000 (ideographic space)
+    const blankspaces = [" ", "　"];
+    // split the mnemonic by either blankspace
+    const mnemonicArr = mnemonic.split(new RegExp(blankspaces.join("|"), "g"))
+
+    if (is12words) {
+      setMnemonic12(mnemonicArr)
+    } else {
+      setMnemonic24(mnemonicArr)
+    }
+    // Update the ref with the current value
+    prevSelectedLangRef.current = selectedLang;
   }, [selectedLang])
 
   const contextValue = {

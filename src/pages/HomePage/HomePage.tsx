@@ -60,7 +60,7 @@ const HomePage: React.FC = () => {
   }, [selectedLang, entropyToPass])
 
   useEffect(() => {
-    if (shares && validateMnemonic(mnemonic.join(" "))) {
+    if (shares && validateMnemonic(selectedLang, mnemonic.join(" "))) {
       handleGenerateShares()
     }
   }, [thresholdNumber, sharesNumber, mnemonic12, mnemonic24])
@@ -73,7 +73,7 @@ const HomePage: React.FC = () => {
     }
 
     if (isFullMnemonic && mnemonic[mnemonic.length - 1].length >= 3) {
-      setIsValidMnemonic(validateMnemonic(mnemonic.join(" ")))
+      setIsValidMnemonic(validateMnemonic(selectedLang, mnemonic.join(" ")))
     }
   }, [mnemonic])
 
@@ -88,13 +88,12 @@ const HomePage: React.FC = () => {
 
   useEffect(() => {
     if (enteredSharesAsString.length > 0) {
-      const restoreResult = restoreMnemonic(enteredSharesAsString)
+      const restoreResult = restoreMnemonic(selectedLang, enteredSharesAsString)
       if (restoreResult.error) {
         //@ts-ignore
         const neededSplitNumber = restoreResult.error.split(" ")[5]
         setInfoMessage(
-          `${enteredShares.length} of ${neededSplitNumber} splits added - ${
-            neededSplitNumber - enteredShares.length
+          `${enteredShares.length} of ${neededSplitNumber} splits added - ${neededSplitNumber - enteredShares.length
           } splits remaining`,
         )
       } else {
@@ -124,9 +123,9 @@ const HomePage: React.FC = () => {
         />
       </div>
       <div className={classes.tabContent}>
-        {activeTabId === 0 ? 
-        <Suspense><GenerateContent /></Suspense> :
-        <Suspense><RestoreContent /></Suspense>}
+        {activeTabId === 0 ?
+          <Suspense><GenerateContent /></Suspense> :
+          <Suspense><RestoreContent /></Suspense>}
       </div>
     </>
   )

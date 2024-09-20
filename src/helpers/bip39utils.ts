@@ -16,18 +16,22 @@ export const generateMnemonicFromEntropy = (language: string, binaryStr: string)
   return bip39.entropyToMnemonic(entropyArr)
 }
 
-export const mnemonicToEntropy = (mnemonic: string) => {
-  return bip39.mnemonicToEntropy(mnemonic)
+export const mnemonicToEntropy = (language: string, mnemonic: string) => {
+  const wordList = bip39.wordlists[language]
+  // console.log(`language: ${language}, mnemonic: ${mnemonic}, wordList: ${wordList}`)
+  return bip39.mnemonicToEntropy(mnemonic, wordList)
 }
 
 export const mnemonicToSeed = (mnemonic: string) => {
   return bip39.mnemonicToSeedSync(mnemonic)
 }
 
-export const entropyToMnemonic = (entropy: Buffer) => {
-  return bip39.entropyToMnemonic(entropy)
+export const entropyToMnemonic = (language: string, entropy: Buffer) => {
+  const wordList = bip39.wordlists[language]
+  return bip39.entropyToMnemonic(entropy, wordList)
 }
 
-export const validateMnemonic = (mnemonic: string) => {
-  return bip39.validateMnemonic(mnemonic)
+export const validateMnemonic = (language: string, mnemonic: string) => {
+  const wordList = bip39.wordlists[language]
+  return bip39.validateMnemonic(mnemonic, wordList)
 }
