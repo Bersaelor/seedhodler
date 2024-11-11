@@ -4,7 +4,7 @@ import InfoGrayIcon from "src/assets/icons/InfoGray.svg"
 import { BadgeTitle } from "src/components/BadgeTitle"
 import { Select } from "src/components/Select"
 import { Switch } from "src/components/Switch"
-import { BadgeColorsEnum, langOptions, wordCountOptions } from "src/constants/index"
+import { BadgeColorsEnum, wordCountOptions } from "src/constants/index"
 
 import classes from "./GenerateContent.module.scss"
 
@@ -34,18 +34,15 @@ export const GenerateContentSettings: React.FC<GenerateContentSettingsProps> = (
 
   return (
     <>
-      <BadgeTitle title="Seed Type" additionalInfo="BIP 39" color={BadgeColorsEnum.SuccessLight} />
-      <div className={classes.configContainer}>
-        <div>
-          <p className={classes.title}>Language</p>
-          <Select
-            defaultValue={selectedLang}
-            onChange={(selectedLangValue: string) => setSelectedLang(selectedLangValue)}
-            options={langOptions}
-          />
-        </div>
-        <div>
-          <p className={classes.title}>Word Count</p>
+      <div className={classes.headerContainer} style={{ marginBottom: "3.6rem" }}>
+        <BadgeTitle
+          title="Seed Type"
+          additionalInfo="BIP 39"
+          color={BadgeColorsEnum.SuccessLight}
+          style={{ marginBottom: 0 }}
+        />
+        <div className={classes.wordCountContainer}>
+          <p>Word number count:</p>
           <Select
             defaultValue={selectedWordCount}
             onChange={handleWordCountChange}
