@@ -29,8 +29,8 @@ const NavFeaturedCard: React.FC<Props> = ({
         </div>
 
         <p className={classes.supportingText}>
-          Seedhodler nicht mit anderen Produkten zu mischen, zb Trezor Generated Seeds. Please make sure
-          to read through this issue before using this product.
+          Do not combine Seedhodler with other products, such as Trezor-generated shamir seeds.
+          Please ensure you read this issue carefully before using this product.
         </p>
       </div>
 
