@@ -82,7 +82,13 @@ const HelpModal: React.FC<Props> = ({ isActive, setIsActive, startTab }) => {
           </TabContent>
 
           <TabContent title={WARNING.title} isActive={activeTab === HelpModalTabs.Warning}>
-            {WARNING.desc}
+            <ul className={classes.list}>
+              <li>{WARNING.firstPrgrph}</li>
+              <li>{WARNING.secondPrgrph}</li>
+              <li>{WARNING.thirdPrgrph}</li>
+              <li>{WARNING.fourthPrgrph}</li>
+              <li>{WARNING.fifthPrgrph}</li>
+            </ul>
           </TabContent>
 
           <TabContent
