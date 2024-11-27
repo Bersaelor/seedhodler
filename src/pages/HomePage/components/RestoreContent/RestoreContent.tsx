@@ -99,12 +99,13 @@ const RestoreContent: React.FC = () => {
       >
         {currentShare.map((word, index) => (
           <Input
+            totalWords={currentShare.length}
             key={index}
             ref={inputRefs[index]}
             onEnter={onEnter}
             onClick={onClick}
             wordlist={slip39wordlist}
-            count={index + 1}
+            wordNr={index + 1}
             index={index}
             value={word}
             onChange={setCurrentShare}

@@ -62,7 +62,11 @@ const BackupContent: React.FC<Props> = ({
         <p className={classes.description} ref={descRef}>
           Time to write down the seed splits. We will verify them later.
         </p>
-        <ShareHeader text={`Share - ${shareId + 1}`} style={{ marginBottom: "1.2rem" }} />
+        <ShareHeader
+          text={`Share - ${shareId + 1}`}
+          style={{ marginBottom: "1.2rem" }}
+          shareString={shares[shareId]}
+        />
         <div className={classes.blockDivider}></div>
         <div className={classes.logoContainer}>
           <div style={{ width: "60px" }} className={classes.whitespace}></div>

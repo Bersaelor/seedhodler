@@ -5,7 +5,8 @@ import React, { Dispatch, SetStateAction, useEffect, useState } from "react"
 import classes from "./Input.module.scss"
 
 type Props = {
-  count?: number
+  totalWords: number
+  wordNr?: number
   index: number
   value: string
   onChange: Dispatch<SetStateAction<string[]>>
@@ -19,8 +20,8 @@ type Props = {
 
 const Input = React.forwardRef<HTMLInputElement, Props>(
   (
-    { 
-      count, index, value, onChange, onClick, onEnter, 
+    {
+      totalWords, wordNr, index, value, onChange, onClick, onEnter,
       wordlist, isError, className, containerStyle
     },
     ref,
@@ -48,6 +49,12 @@ const Input = React.forwardRef<HTMLInputElement, Props>(
     }
 
     const handleChange = (newValue: string) => {
+      // if the user enters a whole list of words, like when copy-pasting,
+      // fill out the whole list
+      if (newValue.split(" ").length === totalWords) {
+        onChange(newValue.split(" "))
+        return
+      }
       onChange(mnemonicArr =>
         mnemonicArr.map((word, wordIndex) => (wordIndex === index ? newValue : word)),
       )
@@ -91,7 +98,7 @@ const Input = React.forwardRef<HTMLInputElement, Props>(
         className={classes.container}
         style={containerStyle}
       >
-        {count && <span className={classes.count}>{count}.</span>}
+        {wordNr && <span className={classes.count}>{wordNr}.</span>}
         <input
           ref={ref}
           type="text"

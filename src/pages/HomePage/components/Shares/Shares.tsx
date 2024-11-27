@@ -1,6 +1,7 @@
 import React, { Dispatch, SetStateAction } from "react"
 
 import BinIcon from "src/assets/icons/Bin.svg"
+import ContentCopy from "src/assets/icons/ContentCopy.svg"
 import NextIcon from "src/assets/icons/Next.svg"
 import PrevIcon from "src/assets/icons/Prev.svg"
 import { Button } from "src/components/Button"
@@ -24,7 +25,7 @@ const Shares: React.FC<Props> = ({
   setActiveShareItemId,
   selectedWordCount,
   isRestore,
-  onDelete = () => {},
+  onDelete = () => { },
 }) => {
   const navigation = []
 
@@ -52,6 +53,11 @@ const Shares: React.FC<Props> = ({
           <div className={classes.shareNumberContainer}>
             <div className={classes.dot}></div>
             <span className={classes.shareNumberHeader}>Share - {activeShareItemId + 1}</span>
+            <button onClick={() => {
+              navigator.clipboard.writeText(shares[activeShareItemId])
+            }}>
+              <img src={ContentCopy} width="20px" height="20px" alt="ContentCopy" className={classes.copyIcon} />
+            </button>
           </div>
           <button
             disabled={activeShareItemId >= shares.length - 1}

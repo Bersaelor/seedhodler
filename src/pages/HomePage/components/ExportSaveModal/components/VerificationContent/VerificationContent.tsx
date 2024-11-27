@@ -148,7 +148,11 @@ const VerificationContent: React.FC<Props> = ({
             {currentShareId + 1} / {sharesNumber} Shares
           </p>
         </div>
-        <ShareHeader text={`Share - ${currentShareId + 1}`} style={{ marginBottom: "1.2rem" }} />
+        <ShareHeader
+          text={`Share - ${currentShareId + 1}`}
+          style={{ marginBottom: "1.2rem" }}
+          shareString={shares[currentShareId]}
+        />
         <div className={classes.blockDivider}></div>
         <div
           className={classes.textPlacesContainer}
@@ -173,20 +177,20 @@ const VerificationContent: React.FC<Props> = ({
                     currentWordObj && currentWordObj?.isActive && currentWordObj?.isError
                       ? variables.colorErrorTransparent
                       : currentWordObj
-                      ? variables.colorBg800
-                      : "",
+                        ? variables.colorBg800
+                        : "",
                   outline:
                     currentWordObj?.isActive && currentWordObj?.isError
                       ? `3px solid ${variables.colorError}`
                       : currentWordObj?.isActive || currentWordObj?.isFulfilled
-                      ? `3px solid ${variables.colorMain}`
-                      : "",
+                        ? `3px solid ${variables.colorMain}`
+                        : "",
                   color:
                     currentWordObj?.isActive && currentWordObj?.isError
                       ? variables.colorError
                       : currentWordObj?.isActive || currentWordObj?.isFulfilled
-                      ? variables.colorMain
-                      : "",
+                        ? variables.colorMain
+                        : "",
                 }}
               />
             )

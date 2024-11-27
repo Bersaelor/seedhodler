@@ -69,11 +69,12 @@ export const GenerateContentShares: React.FC<GenerateContentSharesProps> = ({
       >
         {mnemonic.map((word, index) => (
           <Input
+            totalWords={mnemonic.length}
             key={index}
             ref={inputRefs[index]}
             onEnter={onEnter}
             onClick={onClick}
-            count={index + 1}
+            wordNr={index + 1}
             index={index}
             value={word}
             onChange={setMnemonic}
@@ -160,7 +161,7 @@ export const GenerateContentShares: React.FC<GenerateContentSharesProps> = ({
           </Button>
         </>
       ) : null
-      // <div className={classes.whitespace} />
+        // <div className={classes.whitespace} />
       }
       <ExportSaveModal
         isExportSaveModalActive={isExportSaveModalActive}
