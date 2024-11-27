@@ -47,14 +47,18 @@
   padding: 2.4rem 0;
   box-shadow: 0px 0px 14px -4px rgba(0, 0, 0, 0.05), 0px 32px 48px -8px rgba(0, 0, 0, 0.1);
   border-radius: $radiiMedium;
-  width: 47%;
+  width: 80%;
   min-width: 350px;
-  height: 65%;
+  height: 70%;
   min-height: 650px;
   max-height: 90%;
 
   transform: scale(0.5);
   transition: $transModal;
+
+  @include md-d {
+    width: 90%;
+  }
 }
 
 .modal {
@@ -73,14 +77,17 @@
   &::-webkit-scrollbar {
     width: 1rem;
   }
+
   &::-webkit-scrollbar-track {
     background-color: $colorBg100;
   }
+
   &::-webkit-scrollbar-thumb {
     background-color: darken($colorBg400, 5%);
     border-radius: 100px;
     transition: $transAll;
   }
+
   &::-webkit-scrollbar-thumb:hover {
     background-color: darken($colorBg400, 15%);
   }
