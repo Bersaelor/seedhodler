@@ -1,4 +1,4 @@
-import React, { createContext, Dispatch, SetStateAction, useEffect, useState } from "react"
+import React, { createContext, Dispatch, SetStateAction, useEffect, useMemo, useState } from "react"
 
 import { langOptions, wordCountOptions } from "src/constants/"
 import {
@@ -8,6 +8,7 @@ import {
   getFormattedShares,
   hexStringToByteArray,
   mnemonicToEntropy,
+  validateMnemonic
 } from "src/helpers"
 
 type Context = {
@@ -40,7 +41,6 @@ type Context = {
   handleGenerateShares: () => void
   handleGeneratePhase: () => void
   isValidMnemonic: boolean
-  setIsValidMnemonic: Dispatch<SetStateAction<boolean>> | (() => void)
 }
 
 export const GenerateContext = createContext<Context>({
@@ -73,7 +73,6 @@ export const GenerateContext = createContext<Context>({
   handleGenerateShares: () => { },
   handleGeneratePhase: () => { },
   isValidMnemonic: true,
-  setIsValidMnemonic: () => { },
 })
 
 type ProviderProps = {
@@ -95,7 +94,6 @@ export const GenerateContextProvider: React.FC<ProviderProps> = ({ children }) =
   const [thresholdNumber, setThresholdNumber] = useState(3)
   const [sharesNumber, setSharesNumber] = useState(5)
   const is12words = selectedWordCount === "12"
-  const [isValidMnemonic, setIsValidMnemonic] = useState(true)
 
   const { selectedEntropyAsBinary } = getEntropyDetails(entropyValue, minBits, entropyTypeId)
   const entropyToPass = selectedEntropyAsBinary.slice(-minBits)
@@ -148,6 +146,20 @@ export const GenerateContextProvider: React.FC<ProviderProps> = ({ children }) =
     setMnemonic24(new Array(24).fill(""))
   }, [selectedLang])
 
+  const isValidMnemonic = useMemo(() => {
+    const is12wordsGenerate = selectedWordCount === "12"
+    const mnemonic = is12wordsGenerate ? mnemonic12 : mnemonic24
+    const hasEmptyWord = mnemonic.some(word => word.length === 0)
+
+    if (hasEmptyWord) {
+      return true
+    }
+
+    if (!hasEmptyWord && mnemonic[mnemonic.length - 1].length >= 3) {
+      return validateMnemonic(mnemonic.join(" "))
+    }
+  }, [selectedWordCount, mnemonic12, mnemonic24])
+
   const contextValue = {
     selectedLang,
     setSelectedLang,
@@ -178,7 +190,6 @@ export const GenerateContextProvider: React.FC<ProviderProps> = ({ children }) =
     handleGenerateShares,
     handleGeneratePhase,
     isValidMnemonic,
-    setIsValidMnemonic,
   }
 
   return <GenerateContext.Provider value={contextValue}>{children}</GenerateContext.Provider>

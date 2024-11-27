@@ -15,7 +15,7 @@ const RestoreContent = lazy(() => import("./components/RestoreContent"))
 const HomePage: React.FC = () => {
   const [activeTabId, setActiveTabId] = useState(0)
   const {
-    selectedWordCount: selectedWordCountGenerate,
+    selectedWordCount,
     entropyToPass,
     selectedLang,
     minBits,
@@ -28,8 +28,6 @@ const HomePage: React.FC = () => {
     shares12,
     shares24,
     handleGenerateShares,
-    isValidMnemonic,
-    setIsValidMnemonic,
   } = useContext(GenerateContext)
   const {
     shareLength,
@@ -43,7 +41,7 @@ const HomePage: React.FC = () => {
     setRestoredMnemonic,
   } = useContext(RestoreContext)
 
-  const is12wordsGenerate = selectedWordCountGenerate === "12"
+  const is12wordsGenerate = selectedWordCount === "12"
   const shares = is12wordsGenerate ? shares12 : shares24
   const mnemonic = is12wordsGenerate ? mnemonic12 : mnemonic24
 
@@ -65,18 +63,6 @@ const HomePage: React.FC = () => {
       handleGenerateShares()
     }
   }, [thresholdNumber, sharesNumber, mnemonic12, mnemonic24])
-
-  useEffect(() => {
-    const isFullMnemonic = !mnemonic.some(word => word.length === 0)
-
-    if (!isFullMnemonic) {
-      setIsValidMnemonic(true)
-    }
-
-    if (isFullMnemonic && mnemonic[mnemonic.length - 1].length >= 3) {
-      setIsValidMnemonic(validateMnemonic(mnemonic.join(" ")))
-    }
-  }, [mnemonic])
 
   // Restore effects
   useEffect(() => {
