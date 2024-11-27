@@ -6,6 +6,8 @@ import { GenerateContext } from "src/context/generateContext"
 import { RestoreContext } from "src/context/restoreContext"
 import { generateMnemonicFromEntropy, restoreMnemonic, validateMnemonic } from "src/helpers"
 
+
+import { DerivedAddresses } from "src/components/DerivedAddressContent/DerivedAddressContent"
 import { Tab } from "./components/Tab"
 import classes from "./HomePage.module.scss"
 const GenerateContent = lazy(() => import("./components/GenerateContent"))
@@ -93,8 +95,7 @@ const HomePage: React.FC = () => {
         //@ts-ignore
         const neededSplitNumber = restoreResult.error.split(" ")[5]
         setInfoMessage(
-          `${enteredShares.length} of ${neededSplitNumber} splits added - ${
-            neededSplitNumber - enteredShares.length
+          `${enteredShares.length} of ${neededSplitNumber} splits added - ${neededSplitNumber - enteredShares.length
           } splits remaining`,
         )
       } else {
@@ -124,10 +125,11 @@ const HomePage: React.FC = () => {
         />
       </div>
       <div className={classes.tabContent}>
-        {activeTabId === 0 ? 
-        <Suspense><GenerateContent /></Suspense> :
-        <Suspense><RestoreContent /></Suspense>}
+        {activeTabId === 0 ?
+          <Suspense><GenerateContent /></Suspense> :
+          <Suspense><RestoreContent /></Suspense>}
       </div>
+      <DerivedAddresses />
     </>
   )
 }
