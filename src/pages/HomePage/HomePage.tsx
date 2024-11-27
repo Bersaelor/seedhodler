@@ -3,9 +3,8 @@ import React, { lazy, Suspense, useContext, useEffect, useState } from "react"
 import GenerateIcon from "src/assets/icons/GenerateWithBg.svg"
 import RestoreIcon from "src/assets/icons/RestoreWithBg.svg"
 import { DerivedAddressWrapper } from "src/components/DerivedAddrWrapper/DerivedAddrWrapper"
-import { GenerateContext } from "src/context/generateContext"
 import { RestoreContext } from "src/context/restoreContext"
-import { generateMnemonicFromEntropy, restoreMnemonic, validateMnemonic } from "src/helpers"
+import { restoreMnemonic } from "src/helpers"
 
 import { Tab } from "./components/Tab"
 import classes from "./HomePage.module.scss"
@@ -14,22 +13,6 @@ const RestoreContent = lazy(() => import("./components/RestoreContent"))
 
 const HomePage: React.FC = () => {
   const [activeTabId, setActiveTabId] = useState<"generate" | "restore">("generate")
-
-  const {
-    selectedWordCount,
-    entropyToPass,
-    selectedLang,
-    minBits,
-    thresholdNumber,
-    sharesNumber,
-    mnemonic12,
-    setMnemonic12,
-    mnemonic24,
-    setMnemonic24,
-    shares12,
-    shares24,
-    handleGenerateShares,
-  } = useContext(GenerateContext)
 
   const {
     shareLength,
@@ -42,29 +25,6 @@ const HomePage: React.FC = () => {
     setEnteredShares,
     setRestoredMnemonic,
   } = useContext(RestoreContext)
-
-  const is12wordsGenerate = selectedWordCount === "12"
-  const shares = is12wordsGenerate ? shares12 : shares24
-  const mnemonic = is12wordsGenerate ? mnemonic12 : mnemonic24
-
-  // Generate effects
-  useEffect(() => {
-    if (entropyToPass.length >= minBits) {
-      const mnemonic = generateMnemonicFromEntropy(selectedLang, entropyToPass)
-      const mnemonicArr = mnemonic.split(" ")
-      if (is12wordsGenerate) {
-        setMnemonic12(mnemonicArr)
-      } else {
-        setMnemonic24(mnemonicArr)
-      }
-    }
-  }, [selectedLang, entropyToPass])
-
-  useEffect(() => {
-    if (shares && validateMnemonic(mnemonic.join(" "))) {
-      handleGenerateShares()
-    }
-  }, [thresholdNumber, sharesNumber, mnemonic12, mnemonic24])
 
   // Restore effects
   useEffect(() => {

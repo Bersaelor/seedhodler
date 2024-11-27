@@ -16,18 +16,13 @@ type Context = {
   setSelectedLang: Dispatch<SetStateAction<string>> | (() => void)
   selectedWordCount: string
   setSelectedWordCount: Dispatch<SetStateAction<"12" | "24">> | (() => void)
-  mnemonic12: string[]
-  setMnemonic12: Dispatch<SetStateAction<string[]>> | (() => void)
-  mnemonic24: string[]
-  setMnemonic24: Dispatch<SetStateAction<string[]>> | (() => void)
+  mnemonic: string[]
+  setMnemonic: Dispatch<SetStateAction<string[]>> | (() => void)
   isAdvanced: boolean
   setIsAdvanced: Dispatch<SetStateAction<boolean>> | (() => void)
   entropyValue: string
   setEntropyValue: Dispatch<SetStateAction<string>> | (() => void)
-  shares12: null | string[]
-  setShares12: Dispatch<SetStateAction<null | string[]>> | (() => void)
-  shares24: null | string[]
-  setShares24: Dispatch<SetStateAction<null | string[]>> | (() => void)
+  shares: null | string[]
   activeShareItemId: number
   setActiveShareItemId: Dispatch<SetStateAction<number>> | (() => void)
   entropyTypeId: number
@@ -49,18 +44,13 @@ export const GenerateContext = createContext<Context>({
   setSelectedLang: () => { },
   selectedWordCount: "12",
   setSelectedWordCount: () => { },
-  mnemonic12: [""],
-  setMnemonic12: () => { },
-  mnemonic24: [""],
-  setMnemonic24: () => { },
+  mnemonic: [""],
+  setMnemonic: () => { },
   isAdvanced: false,
   setIsAdvanced: () => { },
   entropyValue: "",
   setEntropyValue: () => { },
-  shares12: null,
-  setShares12: () => { },
-  shares24: null,
-  setShares24: () => { },
+  shares: null,
   activeShareItemId: 0,
   setActiveShareItemId: () => { },
   entropyTypeId: 0,
@@ -129,6 +119,7 @@ export const GenerateContextProvider: React.FC<ProviderProps> = ({ children }) =
   }
 
   const mnemonic = useMemo(() => (is12words ? mnemonic12 : mnemonic24), [is12words, mnemonic12, mnemonic24])
+  const setMnemonic = is12words ? setMnemonic12 : setMnemonic24
   const hasEmptyWord = useMemo(() => mnemonic.some(word => word.length === 0), [mnemonic])
 
   const handleGenerateShares = () => {
@@ -146,37 +137,49 @@ export const GenerateContextProvider: React.FC<ProviderProps> = ({ children }) =
     }
   }
 
+  // set the mnemonic from the entropy
+  useEffect(() => {
+    if (entropyToPass.length >= minBits) {
+      const mnemonic = generateMnemonicFromEntropy(selectedLang, entropyToPass)
+      const mnemonicArr = mnemonic.split(" ")
+      if (is12words) {
+        setMnemonic12(mnemonicArr)
+      } else {
+        setMnemonic24(mnemonicArr)
+      }
+    }
+  }, [entropyToPass, minBits, selectedLang, is12words])
+
   // reset the mnemonic if the language changes
   useEffect(() => {
     setMnemonic12(new Array(12).fill(""))
     setMnemonic24(new Array(24).fill(""))
   }, [selectedLang])
 
-  const isValidMnemonic = useMemo(() => {
-    if (mnemonic[mnemonic.length - 1].length >= 3) {
-      return validateMnemonic(mnemonic.join(" "))
-    }
+  const isValidMnemonic = useMemo(() => validateMnemonic(mnemonic.join(" ")), [hasEmptyWord, mnemonic])
 
-    return false
-  }, [hasEmptyWord, mnemonic])
+  const shares = useMemo(() => (is12words ? shares12 : shares24), [is12words, shares12, shares24])
+
+  // if the mnenoic is valid generate the shares
+  // or if the threshold or shares number changes
+  useEffect(() => {
+    if (shares && isValidMnemonic) {
+      handleGenerateShares()
+    }
+  }, [thresholdNumber, sharesNumber, isValidMnemonic])
 
   const contextValue = {
     selectedLang,
     setSelectedLang,
     selectedWordCount,
     setSelectedWordCount,
-    mnemonic12,
-    setMnemonic12,
-    mnemonic24,
-    setMnemonic24,
+    mnemonic,
+    setMnemonic,
     isAdvanced,
     setIsAdvanced,
     entropyValue,
     setEntropyValue,
-    shares12,
-    setShares12,
-    shares24,
-    setShares24,
+    shares,
     activeShareItemId,
     setActiveShareItemId,
     entropyTypeId,

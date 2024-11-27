@@ -1,5 +1,5 @@
 import * as bip39 from "bip39"
-import React, { useContext, useState } from "react"
+import React, { useContext, useMemo, useState } from "react"
 
 import { BadgeTitle } from "src/components/BadgeTitle"
 import { Button } from "src/components/Button"
@@ -27,22 +27,13 @@ export const GenerateContentShares: React.FC = () => {
     handleGenerateShares,
     hasEmptyWord,
     isValidMnemonic,
-    shares12,
-    shares24,
-    mnemonic12,
-    setMnemonic12,
-    mnemonic24,
-    setMnemonic24,
+    shares,
+    mnemonic,
+    setMnemonic
   } = useContext(GenerateContext)
 
   const [isExportSaveModalActive, setIsExportSaveModalActive] = useState(false)
   const inputRefs = useInputRefs(+selectedWordCount)
-
-  const is12words = selectedWordCount === "12"
-  const mnemonic = is12words ? mnemonic12 : mnemonic24
-  const setMnemonic = is12words ? setMnemonic12 : setMnemonic24
-  const shares = is12words ? shares12 : shares24
-
 
   const onEnter = (index: number) => {
     if (index < +selectedWordCount - 1) {
@@ -55,6 +46,8 @@ export const GenerateContentShares: React.FC = () => {
       inputRefs[index].current.scrollIntoView()
     }
   }
+
+  const isLastWordLongEnough = useMemo(() => mnemonic[mnemonic.length - 1].length >= 3, [mnemonic])
 
   return (
     <>
@@ -75,7 +68,7 @@ export const GenerateContentShares: React.FC = () => {
             value={word}
             onChange={setMnemonic}
             wordlist={bip39.wordlists[selectedLang]}
-            isError={!isValidMnemonic && !hasEmptyWord}
+            isError={!isValidMnemonic && !hasEmptyWord && isLastWordLongEnough}
             containerStyle={{
               width: "49%",
               marginBottom: "1.2rem",
