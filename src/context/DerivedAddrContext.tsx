@@ -12,7 +12,7 @@ export const DerivedAddrContext = createContext<DerivedAddrType>({
 
 export const DerivedAddrContextProvider: React.FC<{
   children: JSX.Element,
-  bip39Seed: string
+  bip39Seed: string[]
 }> = ({
   children,
   bip39Seed,

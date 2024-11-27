@@ -13,22 +13,22 @@ export const DerivedAddressWrapper: React.FC<{
   homeScreenTab
 }) => {
 
-    const { isValidMnemonic } = useContext(GenerateContext)
-    const { isFullMnemonic } = useContext(RestoreContext)
+    const { isValidMnemonic, mnemonic: generateMnemonic } = useContext(GenerateContext)
+    const { isFullMnemonic, restoredMnemonic } = useContext(RestoreContext)
 
-    const showDerivedAddresses = useMemo(() => {
-      console.log("homeScreenTab", homeScreenTab)
-      console.log("isValidMnemonic", isValidMnemonic)
-      console.log("isFullMnemonic", isFullMnemonic)
-      return homeScreenTab === "generate" ? isValidMnemonic : isFullMnemonic
-    }, [homeScreenTab, isValidMnemonic, isFullMnemonic])
+    const showDerivedAddresses = useMemo(
+      () => homeScreenTab === "generate" ? isValidMnemonic : isFullMnemonic,
+      [homeScreenTab, isValidMnemonic, isFullMnemonic]
+    )
 
     if (!showDerivedAddresses) return null
 
-    return (<DerivedAddrContextProvider bip39Seed="">
+    return (
       <div className={classes.container}>
         <p className={classes.title}>Derived Addresses</p>
-        <DerivedAddressContent />
+        <DerivedAddrContextProvider bip39Seed={homeScreenTab === "generate" ? generateMnemonic : restoredMnemonic}>
+          <DerivedAddressContent />
+        </DerivedAddrContextProvider>
       </div>
-    </DerivedAddrContextProvider>)
+    )
   }

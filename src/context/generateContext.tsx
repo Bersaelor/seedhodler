@@ -33,7 +33,7 @@ type Context = {
   setThresholdNumber: Dispatch<SetStateAction<number>> | (() => void)
   sharesNumber: number
   setSharesNumber: Dispatch<SetStateAction<number>> | (() => void)
-  handleGenerateShares: () => void
+  splitMnemonicIntoShares: () => void
   handleGeneratePhase: () => void
   hasEmptyWord: boolean
   isValidMnemonic: boolean
@@ -61,7 +61,7 @@ export const GenerateContext = createContext<Context>({
   setThresholdNumber: () => { },
   sharesNumber: 0,
   setSharesNumber: () => { },
-  handleGenerateShares: () => { },
+  splitMnemonicIntoShares: () => { },
   handleGeneratePhase: () => { },
   hasEmptyWord: true,
   isValidMnemonic: true,
@@ -122,7 +122,7 @@ export const GenerateContextProvider: React.FC<ProviderProps> = ({ children }) =
   const setMnemonic = is12words ? setMnemonic12 : setMnemonic24
   const hasEmptyWord = useMemo(() => mnemonic.some(word => word.length === 0), [mnemonic])
 
-  const handleGenerateShares = () => {
+  const splitMnemonicIntoShares = () => {
     setActiveShareItemId(0)
 
     const mnemonicStr = mnemonic.join(" ")
@@ -164,7 +164,7 @@ export const GenerateContextProvider: React.FC<ProviderProps> = ({ children }) =
   // or if the threshold or shares number changes
   useEffect(() => {
     if (shares && isValidMnemonic) {
-      handleGenerateShares()
+      splitMnemonicIntoShares()
     }
   }, [thresholdNumber, sharesNumber, isValidMnemonic])
 
@@ -190,7 +190,7 @@ export const GenerateContextProvider: React.FC<ProviderProps> = ({ children }) =
     setThresholdNumber,
     sharesNumber,
     setSharesNumber,
-    handleGenerateShares,
+    splitMnemonicIntoShares,
     handleGeneratePhase,
     hasEmptyWord,
     isValidMnemonic,

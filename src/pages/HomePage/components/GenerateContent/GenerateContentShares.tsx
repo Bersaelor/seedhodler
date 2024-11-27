@@ -24,7 +24,7 @@ export const GenerateContentShares: React.FC = () => {
     setThresholdNumber,
     sharesNumber,
     setSharesNumber,
-    handleGenerateShares,
+    splitMnemonicIntoShares,
     hasEmptyWord,
     isValidMnemonic,
     shares,
@@ -128,7 +128,7 @@ export const GenerateContentShares: React.FC = () => {
             </div>
           </div>
           {!shares && (
-            <Button onClick={handleGenerateShares} fullWidth style={{ marginBottom: "3.6rem" }}>
+            <Button onClick={splitMnemonicIntoShares} fullWidth style={{ marginBottom: "3.6rem" }}>
               Split
             </Button>
           )}
