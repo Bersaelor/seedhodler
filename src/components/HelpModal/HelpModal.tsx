@@ -2,6 +2,7 @@ import React, { Dispatch, SetStateAction, useEffect, useState } from "react"
 
 import TabContent from "./components/TabContent"
 
+import parse from 'html-react-parser'
 import { Button } from "src/components/Button"
 import { Modal } from "src/components/Modal"
 import { BadgeColorsEnum, HelpModalTabs, helpModalTabTexts, helpModalTabTitles } from "src/constants/"
@@ -82,13 +83,18 @@ const HelpModal: React.FC<Props> = ({ isActive, setIsActive, startTab }) => {
           </TabContent>
 
           <TabContent title={WARNING.title} isActive={activeTab === HelpModalTabs.Warning}>
-            <ul className={classes.list}>
-              <li>{WARNING.firstPrgrph}</li>
-              <li>{WARNING.secondPrgrph}</li>
-              <li>{WARNING.thirdPrgrph}</li>
-              <li>{WARNING.fourthPrgrph}</li>
-              <li>{WARNING.fifthPrgrph}</li>
-            </ul>
+            <p className={classes.introText}>
+              {parse(WARNING.intro)}
+            </p>
+            {WARNING.parts.map((warningPart, index) => (<>
+              <p className={classes.warningSubTitle}>{warningPart.title}</p>
+              <ul key={index} className={classes.list}>
+                {warningPart.list.map((li, index) => <li key={index}>{parse(li)}</li>)}
+              </ul>
+            </>))}
+            <p>
+              {parse(WARNING.outro)}
+            </p>
           </TabContent>
 
           <TabContent
