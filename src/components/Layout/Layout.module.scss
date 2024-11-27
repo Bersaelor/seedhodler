@@ -20,9 +20,13 @@
   @include md-d {
     display: none !important;
   }
+
   @include lg-d {
     width: 300px;
   }
+
+  // allow separate scrolling inside the navbar when shorter then window height
+  overflow-y: auto;
 }
 
 .logo {
@@ -126,6 +130,7 @@
   @include md-d {
     margin-left: 0 !important;
   }
+
   @include lg-d {
     margin-left: 300px;
   }
@@ -155,6 +160,7 @@
 .onlineMessage {
   @extend %message;
 }
+
 .offlineNotification {
   @extend %notification;
   border-top: 4px solid $colorSuccess;

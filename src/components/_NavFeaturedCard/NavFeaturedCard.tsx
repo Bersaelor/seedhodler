@@ -24,9 +24,9 @@ const NavFeaturedCard: React.FC<Props> = ({
   return (
     <div className={classes.mainContainer}>
       <div className={classes.mainContentContainer}>
-        <div className={classes.titleWrap}>
-          <p className={classes.title}>Attention!</p>
-        </div>
+        <p className={classes.title}>
+          Attention!
+        </p>
 
         <p className={classes.supportingText}>
           Do not combine Seedhodler with other products, such as Trezor-generated shamir seeds.
@@ -34,11 +34,9 @@ const NavFeaturedCard: React.FC<Props> = ({
         </p>
       </div>
 
-      <div className={classes.actions}>
-        <button className={classes.buttonContainer} onClick={handleMoreInfoButton}>
-          <p className={classes.moreInfoButton}>More info</p>
-        </button>
-      </div>
+      <button className={classes.actionButton} onClick={handleMoreInfoButton}>
+        <p>More info</p>
+      </button>
     </div>
   )
 }
