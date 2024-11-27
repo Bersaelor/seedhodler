@@ -90,13 +90,15 @@ export const GenerateContextProvider: React.FC<ProviderProps> = ({ children }) =
   const [shares24, setShares24] = useState<null | string[]>(null)
   const [activeShareItemId, setActiveShareItemId] = useState(0)
   const [entropyTypeId, setEntropyTypeId] = useState(0)
-  const minBits: 128 | 256 = +selectedWordCount === 12 ? 128 : 256
+  const is12words = useMemo(() => selectedWordCount === "12", [selectedWordCount])
+  const minBits = useMemo(() => is12words ? 128 : 256, [is12words])
   const [thresholdNumber, setThresholdNumber] = useState(3)
   const [sharesNumber, setSharesNumber] = useState(5)
-  const is12words = selectedWordCount === "12"
 
-  const { selectedEntropyAsBinary } = getEntropyDetails(entropyValue, minBits, entropyTypeId)
-  const entropyToPass = selectedEntropyAsBinary.slice(-minBits)
+  const entropyToPass = useMemo(() => {
+    const { selectedEntropyAsBinary } = getEntropyDetails(entropyValue, minBits, entropyTypeId)
+    return selectedEntropyAsBinary.slice(-minBits)
+  }, [entropyValue, minBits, entropyTypeId])
 
   const handleGeneratePhase = () => {
     if (is12words) {
@@ -124,9 +126,10 @@ export const GenerateContextProvider: React.FC<ProviderProps> = ({ children }) =
     }
   }
 
+  const mnemonic = useMemo(() => (is12words ? mnemonic12 : mnemonic24), [is12words, mnemonic12, mnemonic24])
+
   const handleGenerateShares = () => {
     setActiveShareItemId(0)
-    const mnemonic = is12words ? mnemonic12 : mnemonic24
 
     const mnemonicStr = mnemonic.join(" ")
     const groups = [[thresholdNumber, sharesNumber]]
@@ -147,8 +150,6 @@ export const GenerateContextProvider: React.FC<ProviderProps> = ({ children }) =
   }, [selectedLang])
 
   const isValidMnemonic = useMemo(() => {
-    const is12wordsGenerate = selectedWordCount === "12"
-    const mnemonic = is12wordsGenerate ? mnemonic12 : mnemonic24
     const hasEmptyWord = mnemonic.some(word => word.length === 0)
 
     if (hasEmptyWord) {
@@ -158,6 +159,8 @@ export const GenerateContextProvider: React.FC<ProviderProps> = ({ children }) =
     if (!hasEmptyWord && mnemonic[mnemonic.length - 1].length >= 3) {
       return validateMnemonic(mnemonic.join(" "))
     }
+
+    return false
   }, [selectedWordCount, mnemonic12, mnemonic24])
 
   const contextValue = {

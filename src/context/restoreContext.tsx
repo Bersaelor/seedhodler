@@ -1,4 +1,4 @@
-import React, { createContext, Dispatch, SetStateAction, useState } from "react"
+import React, { createContext, Dispatch, SetStateAction, useMemo, useState } from "react"
 
 import { wordCountOptions } from "src/constants/"
 import { validateShare } from "src/helpers"
@@ -24,20 +24,20 @@ type Context = {
 
 export const RestoreContext = createContext<Context>({
   selectedWordCount: "12",
-  setSelectedWordCount: () => {},
+  setSelectedWordCount: () => { },
   shareLength: 20,
   currentShare: [""],
-  setCurrentShare: () => {},
+  setCurrentShare: () => { },
   isCurrentShareValid: false,
   infoMessage: "",
-  setInfoMessage: () => {},
+  setInfoMessage: () => { },
   enteredShares: [[""]],
-  setEnteredShares: () => {},
+  setEnteredShares: () => { },
   activeShareItemId: 0,
-  setActiveShareItemId: () => {},
+  setActiveShareItemId: () => { },
   enteredSharesAsString: [""],
   restoredMnemonic: [""],
-  setRestoredMnemonic: () => {},
+  setRestoredMnemonic: () => { },
   isFullMnemonic: false,
 })
 
@@ -57,7 +57,7 @@ export const RestoreContextProvider: React.FC<ProviderProps> = ({ children }) =>
   const [restoredMnemonic, setRestoredMnemonic] = useState<string[]>(
     new Array(+selectedWordCount).fill(""),
   )
-  const isFullMnemonic = restoredMnemonic.every(word => word.length > 0)
+  const isFullMnemonic = useMemo(() => restoredMnemonic.every(word => word.length > 0), [restoredMnemonic])
 
   const contextValue = {
     selectedWordCount,
