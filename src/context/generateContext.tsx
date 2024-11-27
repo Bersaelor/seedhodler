@@ -15,7 +15,7 @@ type Context = {
   selectedLang: string
   setSelectedLang: Dispatch<SetStateAction<string>> | (() => void)
   selectedWordCount: string
-  setSelectedWordCount: Dispatch<SetStateAction<string>> | (() => void)
+  setSelectedWordCount: Dispatch<SetStateAction<"12" | "24">> | (() => void)
   mnemonic12: string[]
   setMnemonic12: Dispatch<SetStateAction<string[]>> | (() => void)
   mnemonic24: string[]
@@ -40,6 +40,7 @@ type Context = {
   setSharesNumber: Dispatch<SetStateAction<number>> | (() => void)
   handleGenerateShares: () => void
   handleGeneratePhase: () => void
+  hasEmptyWord: boolean
   isValidMnemonic: boolean
 }
 
@@ -72,6 +73,7 @@ export const GenerateContext = createContext<Context>({
   setSharesNumber: () => { },
   handleGenerateShares: () => { },
   handleGeneratePhase: () => { },
+  hasEmptyWord: true,
   isValidMnemonic: true,
 })
 
@@ -81,7 +83,7 @@ type ProviderProps = {
 
 export const GenerateContextProvider: React.FC<ProviderProps> = ({ children }) => {
   const [selectedLang, setSelectedLang] = useState(langOptions[0].value)
-  const [selectedWordCount, setSelectedWordCount] = useState(wordCountOptions[0].value)
+  const [selectedWordCount, setSelectedWordCount] = useState<"12" | "24">(wordCountOptions[0].value)
   const [mnemonic12, setMnemonic12] = useState(new Array(12).fill(""))
   const [mnemonic24, setMnemonic24] = useState(new Array(24).fill(""))
   const [isAdvanced, setIsAdvanced] = useState(false)
@@ -91,7 +93,7 @@ export const GenerateContextProvider: React.FC<ProviderProps> = ({ children }) =
   const [activeShareItemId, setActiveShareItemId] = useState(0)
   const [entropyTypeId, setEntropyTypeId] = useState(0)
   const is12words = useMemo(() => selectedWordCount === "12", [selectedWordCount])
-  const minBits = useMemo(() => is12words ? 128 : 256, [is12words])
+  const minBits = useMemo<128 | 256>(() => is12words ? 128 : 256, [is12words])
   const [thresholdNumber, setThresholdNumber] = useState(3)
   const [sharesNumber, setSharesNumber] = useState(5)
 
@@ -127,6 +129,7 @@ export const GenerateContextProvider: React.FC<ProviderProps> = ({ children }) =
   }
 
   const mnemonic = useMemo(() => (is12words ? mnemonic12 : mnemonic24), [is12words, mnemonic12, mnemonic24])
+  const hasEmptyWord = useMemo(() => mnemonic.some(word => word.length === 0), [mnemonic])
 
   const handleGenerateShares = () => {
     setActiveShareItemId(0)
@@ -150,18 +153,12 @@ export const GenerateContextProvider: React.FC<ProviderProps> = ({ children }) =
   }, [selectedLang])
 
   const isValidMnemonic = useMemo(() => {
-    const hasEmptyWord = mnemonic.some(word => word.length === 0)
-
-    if (hasEmptyWord) {
-      return true
-    }
-
-    if (!hasEmptyWord && mnemonic[mnemonic.length - 1].length >= 3) {
+    if (mnemonic[mnemonic.length - 1].length >= 3) {
       return validateMnemonic(mnemonic.join(" "))
     }
 
     return false
-  }, [selectedWordCount, mnemonic12, mnemonic24])
+  }, [hasEmptyWord, mnemonic])
 
   const contextValue = {
     selectedLang,
@@ -192,6 +189,7 @@ export const GenerateContextProvider: React.FC<ProviderProps> = ({ children }) =
     setSharesNumber,
     handleGenerateShares,
     handleGeneratePhase,
+    hasEmptyWord,
     isValidMnemonic,
   }
 

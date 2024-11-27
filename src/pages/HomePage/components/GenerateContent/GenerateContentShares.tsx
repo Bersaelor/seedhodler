@@ -1,5 +1,5 @@
 import * as bip39 from "bip39"
-import React, { Dispatch, SetStateAction, useState } from "react"
+import React, { useContext, useState } from "react"
 
 import { BadgeTitle } from "src/components/BadgeTitle"
 import { Button } from "src/components/Button"
@@ -7,46 +7,42 @@ import { Calc } from "src/components/Calc"
 import { InfoTitle } from "src/components/InfoTitle"
 import { Input } from "src/components/Input"
 import { BadgeColorsEnum, ButtonColorsEnum } from "src/constants/index"
+import { GenerateContext } from "src/context/generateContext"
 import { useInputRefs } from "src/hooks"
 
 import { ExportSaveModal } from "../ExportSaveModal"
 import { Shares } from "../Shares"
 import classes from "./GenerateContent.module.scss"
 
-type GenerateContentSharesProps = {
-  selectedLang: string
-  mnemonic: string[]
-  shares: null | string[]
-  selectedWordCount: string
-  activeShareItemId: number
-  setMnemonic: Dispatch<SetStateAction<string[]>>
-  setActiveShareItemId: Dispatch<SetStateAction<number>>
-  thresholdNumber: number
-  setThresholdNumber: Dispatch<SetStateAction<number>>
-  sharesNumber: number
-  setSharesNumber: Dispatch<SetStateAction<number>>
-  handleGenerateShares: () => void
-  isValidMnemonic: boolean
-}
+export const GenerateContentShares: React.FC = () => {
+  const {
+    selectedLang,
+    selectedWordCount,
+    activeShareItemId,
+    setActiveShareItemId,
+    thresholdNumber,
+    setThresholdNumber,
+    sharesNumber,
+    setSharesNumber,
+    handleGenerateShares,
+    hasEmptyWord,
+    isValidMnemonic,
+    shares12,
+    shares24,
+    mnemonic12,
+    setMnemonic12,
+    mnemonic24,
+    setMnemonic24,
+  } = useContext(GenerateContext)
 
-export const GenerateContentShares: React.FC<GenerateContentSharesProps> = ({
-  selectedLang,
-  mnemonic,
-  shares,
-  selectedWordCount,
-  activeShareItemId,
-  setMnemonic,
-  setActiveShareItemId,
-  thresholdNumber,
-  setThresholdNumber,
-  sharesNumber,
-  setSharesNumber,
-  handleGenerateShares,
-  isValidMnemonic,
-}) => {
   const [isExportSaveModalActive, setIsExportSaveModalActive] = useState(false)
   const inputRefs = useInputRefs(+selectedWordCount)
-  const isSomeEmptyWord = mnemonic.some(word => word.length === 0)
+
+  const is12words = selectedWordCount === "12"
+  const mnemonic = is12words ? mnemonic12 : mnemonic24
+  const setMnemonic = is12words ? setMnemonic12 : setMnemonic24
+  const shares = is12words ? shares12 : shares24
+
 
   const onEnter = (index: number) => {
     if (index < +selectedWordCount - 1) {
@@ -79,7 +75,7 @@ export const GenerateContentShares: React.FC<GenerateContentSharesProps> = ({
             value={word}
             onChange={setMnemonic}
             wordlist={bip39.wordlists[selectedLang]}
-            isError={!isValidMnemonic}
+            isError={!isValidMnemonic && !hasEmptyWord}
             containerStyle={{
               width: "49%",
               marginBottom: "1.2rem",
@@ -89,7 +85,7 @@ export const GenerateContentShares: React.FC<GenerateContentSharesProps> = ({
         ))}
       </div>
 
-      {!isSomeEmptyWord ? (
+      {isValidMnemonic ? (
         <>
           <BadgeTitle title="Split Seed into Shares" color={BadgeColorsEnum.SuccessLight} />
           <p className={classes.sharesInfo}>

@@ -1,4 +1,4 @@
-import React, { Dispatch, SetStateAction } from "react"
+import React, { useContext } from "react"
 import CardsIcon from "src/assets/icons/Cards.svg"
 import CoinIcon from "src/assets/icons/Coin.svg"
 import DiceIcon from "src/assets/icons/Dice.svg"
@@ -11,26 +11,21 @@ import { Textarea } from "src/components/Textarea"
 import { getEntropyDetails } from "src/helpers"
 import variables from "src/styles/Variables.module.scss"
 
+import { GenerateContext } from "src/context/generateContext"
 import { EntropyValueType } from "../EntropyValueType"
 import classes from "./GenerateContent.module.scss"
 
 const entropy: number[] = []
 
-type GenerateContentAdvancedProps = {
-  minBits: 128 | 256
-  setEntropyValue: Dispatch<SetStateAction<string>>
-  entropyValue: string
-  entropyTypeId: number
-  setEntropyTypeId: Dispatch<SetStateAction<number>>
-}
+export const GenerateContentAdvanced: React.FC = () => {
 
-export const GenerateContentAdvanced: React.FC<GenerateContentAdvancedProps> = ({
-  minBits,
-  setEntropyValue,
-  entropyValue,
-  entropyTypeId,
-  setEntropyTypeId,
-}) => {
+  const {
+    minBits,
+    setEntropyValue,
+    entropyValue,
+    entropyTypeId,
+    setEntropyTypeId,
+  } = useContext(GenerateContext)
   // const [mousePercentage, setMousePercentage] = useState(0)
   // const [isMouseCapture, setIsMouseCapture] = useState(false)
 

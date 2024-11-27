@@ -13,7 +13,8 @@ const GenerateContent = lazy(() => import("./components/GenerateContent"))
 const RestoreContent = lazy(() => import("./components/RestoreContent"))
 
 const HomePage: React.FC = () => {
-  const [activeTabId, setActiveTabId] = useState(0)
+  const [activeTabId, setActiveTabId] = useState<"generate" | "restore">("generate")
+
   const {
     selectedWordCount,
     entropyToPass,
@@ -29,6 +30,7 @@ const HomePage: React.FC = () => {
     shares24,
     handleGenerateShares,
   } = useContext(GenerateContext)
+
   const {
     shareLength,
     selectedWordCount: selectedWordCountRestore,
@@ -98,23 +100,23 @@ const HomePage: React.FC = () => {
           title="Generate"
           desc="Generate a BIP39 Master Seed and split it into shares"
           icon={GenerateIcon}
-          active={activeTabId === 0}
-          onClick={() => setActiveTabId(0)}
+          active={activeTabId === 'generate'}
+          onClick={() => setActiveTabId('generate')}
         />
         <Tab
           title="Restore"
           desc="Combine enough shares to retrieve your Master Seed"
           icon={RestoreIcon}
-          active={activeTabId === 1}
-          onClick={() => setActiveTabId(1)}
+          active={activeTabId === 'restore'}
+          onClick={() => setActiveTabId('restore')}
         />
       </div>
       <div className={classes.tabContent}>
-        {activeTabId === 0 ?
+        {activeTabId === 'generate' ?
           <Suspense><GenerateContent /></Suspense> :
           <Suspense><RestoreContent /></Suspense>}
       </div>
-      <DerivedAddressWrapper />
+      <DerivedAddressWrapper homeScreenTab={activeTabId} />
     </>
   )
 }

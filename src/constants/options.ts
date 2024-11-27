@@ -11,7 +11,12 @@ export const langOptions = [
   { value: "portuguese", label: "Portuguese" },
 ]
 
-export const wordCountOptions = [
+type WordCountOption = {
+  value: "12" | "24"
+  label: "12" | "24"
+}
+
+export const wordCountOptions: WordCountOption[] = [
   { value: "12", label: "12" },
   { value: "24", label: "24" },
 ]
