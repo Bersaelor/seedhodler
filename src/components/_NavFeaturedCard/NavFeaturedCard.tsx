@@ -1,24 +1,18 @@
-import React, { Dispatch, SetStateAction } from "react"
+import React, { useContext } from "react"
 
 import { HelpModalTabs } from "src/constants"
+import { HelpModalContext } from "src/context/HelpModalContext"
 import classes from "./NavFeaturedCard.module.scss/"
 
-type Props = {
-  setIsActive: Dispatch<SetStateAction<boolean>>
-  setIsHelpModalActive: Dispatch<SetStateAction<boolean>>
-  setHelpModalStartTab: Dispatch<SetStateAction<number | null>>
-}
+type Props = {}
 
-const NavFeaturedCard: React.FC<Props> = ({
-  setIsActive,
-  setIsHelpModalActive,
-  setHelpModalStartTab,
-}) => {
+const NavFeaturedCard: React.FC<Props> = ({ }) => {
+
+  const { setTab, setIsOpen } = useContext(HelpModalContext)
+
   const handleMoreInfoButton = () => {
-    setHelpModalStartTab(HelpModalTabs.Warning)
-    setIsHelpModalActive(true)
-    //uncomment if you need to close the window after opening HelpModal
-    // setIsActive(false)
+    setTab(HelpModalTabs.Warning)
+    setIsOpen(true)
   }
 
   return (

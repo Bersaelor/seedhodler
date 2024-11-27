@@ -1,4 +1,4 @@
-import React, { Dispatch, SetStateAction } from "react"
+import React, { Dispatch, SetStateAction, useContext } from "react"
 import { Link, Outlet } from "react-router-dom"
 
 import InfoRed from "src/assets/icons/InfoRed.svg"
@@ -8,23 +8,23 @@ import QuestionMarkIcon from "src/assets/icons/QuestionMark.svg?react"
 import CheckmarkInfo from "src/components/CheckmarkInfo"
 import { NavFeaturedCard } from "src/components/_NavFeaturedCard"
 
+import { HelpModalTabs } from "src/constants"
+import { HelpModalContext } from "src/context/HelpModalContext"
 import classes from "./Layout.module.scss"
 
 type Props = {
   isOnline: boolean
-  setIsHelpModalActive: Dispatch<SetStateAction<boolean>>
-  setHelpModalStartTab: Dispatch<SetStateAction<number | null>>
-  isActive: boolean
-  setIsActive: Dispatch<SetStateAction<boolean>>
+  showWarning: boolean
+  setShowWarning: Dispatch<SetStateAction<boolean>>
 }
 
 const Layout: React.FC<Props> = ({
   isOnline,
-  setIsHelpModalActive,
-  isActive,
-  setIsActive,
-  setHelpModalStartTab,
+  showWarning,
+  setShowWarning,
 }) => {
+  const { setIsOpen: setHelpModalOpen, setTab } = useContext(HelpModalContext)
+
   return (
     <div className={classes.mainContainer}>
       <nav className={classes.nav}>
@@ -56,15 +56,14 @@ const Layout: React.FC<Props> = ({
           <CheckmarkInfo isCheckmark={false}>Restore your master seed</CheckmarkInfo>
         </div>
         <div className={classes.navContentBottom}>
-          {isActive ? (
-            <NavFeaturedCard
-              setIsActive={setIsActive}
-              setIsHelpModalActive={setIsHelpModalActive}
-              setHelpModalStartTab={setHelpModalStartTab}
-            />
+          {showWarning ? (
+            <NavFeaturedCard />
           ) : null}
           <div className={classes.helpButtonContainer}>
-            <button onClick={() => setIsHelpModalActive(prev => !prev)} className={classes.helpButton}>
+            <button onClick={() => {
+              setHelpModalOpen(true)
+              setTab(HelpModalTabs.Introduction)
+            }} className={classes.helpButton}>
               <QuestionMarkIcon />
               Help & getting started
             </button>

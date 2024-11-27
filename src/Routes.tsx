@@ -9,16 +9,14 @@ type Props = {
   isOnline: boolean
   setIsHelpModalActive: Dispatch<SetStateAction<boolean>>
   setHelpModalStartTab: Dispatch<SetStateAction<number | null>>
-  isActive: boolean
-  setIsActive: Dispatch<SetStateAction<boolean>>
+  showWarning: boolean
+  setShowWarning: Dispatch<SetStateAction<boolean>>
 }
 
 const Routes: React.FC<Props> = ({
   isOnline,
-  setIsHelpModalActive,
-  isActive,
-  setIsActive,
-  setHelpModalStartTab,
+  showWarning,
+  setShowWarning,
 }) => {
   return (
     <RouterDomRoutes>
@@ -27,10 +25,8 @@ const Routes: React.FC<Props> = ({
         element={
           <Layout
             isOnline={isOnline}
-            setIsHelpModalActive={setIsHelpModalActive}
-            isActive={isActive}
-            setIsActive={setIsActive}
-            setHelpModalStartTab={setHelpModalStartTab}
+            showWarning={showWarning}
+            setShowWarning={setShowWarning}
           />
         }
       >

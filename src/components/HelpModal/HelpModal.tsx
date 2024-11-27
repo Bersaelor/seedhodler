@@ -1,4 +1,4 @@
-import React, { Dispatch, SetStateAction, useEffect, useState } from "react"
+import React, { useContext } from "react"
 
 import TabContent from "./components/TabContent"
 
@@ -7,31 +7,28 @@ import { Button } from "src/components/Button"
 import { Modal } from "src/components/Modal"
 import { BadgeColorsEnum, HelpModalTabs, helpModalTabTexts, helpModalTabTitles } from "src/constants/"
 
+import { HelpModalContext } from "src/context/HelpModalContext"
 import classes from "./HelpModal.module.scss"
 
-type Props = {
-  isActive: boolean
-  setIsActive: Dispatch<SetStateAction<boolean>>
-  startTab?: number | null
-}
 
-const HelpModal: React.FC<Props> = ({ isActive, setIsActive, startTab }) => {
-  const [activeTab, setActiveTab] = useState(HelpModalTabs.Introduction)
+const HelpModal: React.FC = () => {
+
   const { GENERATING, INTRODUCTION, RECONSTRUCTING, WARNING, TIPS_AND_BEST_PRACTICES, ABOUT, LEGAL } =
     helpModalTabTexts
 
-  useEffect(() => setActiveTab(startTab ?? HelpModalTabs.Introduction), [startTab])
+  const { isOpen, setIsOpen, tab, setTab } = useContext(HelpModalContext)
 
   const handleClose = () => {
-    setIsActive(false)
-    setActiveTab(HelpModalTabs.Introduction)
+    setIsOpen(false)
+    setTab(HelpModalTabs.Introduction)
   }
+
   return (
     <Modal
       badgeColor={BadgeColorsEnum.Success}
       title="Help & getting started"
-      isActive={isActive}
-      setIsActive={setIsActive}
+      isActive={isOpen}
+      setIsActive={(v) => setIsOpen(v)}
       style={{ height: "auto" }}
     >
       <div className={classes.container}>
@@ -40,15 +37,15 @@ const HelpModal: React.FC<Props> = ({ isActive, setIsActive, startTab }) => {
           {helpModalTabTitles.map(({ title, index }) => (
             <div
               key={index}
-              className={activeTab === index ? `${classes.tab} ${classes.activeTab}` : classes.tab}
-              onClick={() => setActiveTab(index)}
+              className={tab === index ? `${classes.tab} ${classes.activeTab}` : classes.tab}
+              onClick={() => setTab(index)}
             >
               {title}
             </div>
           ))}
         </div>
         <div className={classes.contentBlock}>
-          <TabContent title={INTRODUCTION.title} isActive={activeTab === HelpModalTabs.Introduction}>
+          <TabContent title={INTRODUCTION.title} isActive={tab === HelpModalTabs.Introduction}>
             {INTRODUCTION.toolDescription}{" "}
             <a
               href="https://en.wikipedia.org/wiki/Shamir%27s_Secret_Sharing"
@@ -63,7 +60,7 @@ const HelpModal: React.FC<Props> = ({ isActive, setIsActive, startTab }) => {
             {INTRODUCTION.usageDescription}
           </TabContent>
 
-          <TabContent title={GENERATING.title} isActive={activeTab === HelpModalTabs.Generating}>
+          <TabContent title={GENERATING.title} isActive={tab === HelpModalTabs.Generating}>
             <ul className={classes.list}>
               <li>{GENERATING.firstPrgrph}</li>
               <li>{GENERATING.secondPrgrph}</li>
@@ -74,7 +71,7 @@ const HelpModal: React.FC<Props> = ({ isActive, setIsActive, startTab }) => {
             </ul>
           </TabContent>
 
-          <TabContent title={RECONSTRUCTING.title} isActive={activeTab === HelpModalTabs.Reconstructing}>
+          <TabContent title={RECONSTRUCTING.title} isActive={tab === HelpModalTabs.Reconstructing}>
             <ul className={classes.list}>
               <li>{RECONSTRUCTING.firstPrgrph}</li>
               <li>{RECONSTRUCTING.secondPrgrph}</li>
@@ -82,16 +79,16 @@ const HelpModal: React.FC<Props> = ({ isActive, setIsActive, startTab }) => {
             </ul>
           </TabContent>
 
-          <TabContent title={WARNING.title} isActive={activeTab === HelpModalTabs.Warning}>
+          <TabContent title={WARNING.title} isActive={tab === HelpModalTabs.Warning}>
             <p className={classes.introText}>
               {parse(WARNING.intro)}
             </p>
-            {WARNING.parts.map((warningPart, index) => (<>
+            {WARNING.parts.map((warningPart, index) => (<div key={index}>
               <p className={classes.warningSubTitle}>{warningPart.title}</p>
-              <ul key={index} className={classes.list}>
-                {warningPart.list.map((li, index) => <li key={index}>{parse(li)}</li>)}
+              <ul className={classes.list}>
+                {warningPart.list.map((li, index2) => <li key={index2}>{parse(li)}</li>)}
               </ul>
-            </>))}
+            </div>))}
             <p>
               {parse(WARNING.outro)}
             </p>
@@ -99,7 +96,7 @@ const HelpModal: React.FC<Props> = ({ isActive, setIsActive, startTab }) => {
 
           <TabContent
             title={TIPS_AND_BEST_PRACTICES.title}
-            isActive={activeTab === HelpModalTabs.Tips_and_best_practices}
+            isActive={tab === HelpModalTabs.Tips_and_best_practices}
           >
             <ul className={classes.list}>
               <li>{TIPS_AND_BEST_PRACTICES.firstPrgrph}</li>
@@ -109,11 +106,11 @@ const HelpModal: React.FC<Props> = ({ isActive, setIsActive, startTab }) => {
             </ul>
           </TabContent>
 
-          <TabContent title={ABOUT.title} isActive={activeTab === HelpModalTabs.About}>
+          <TabContent title={ABOUT.title} isActive={tab === HelpModalTabs.About}>
             {ABOUT.desc}
           </TabContent>
 
-          <TabContent title={LEGAL.title} isActive={activeTab === HelpModalTabs.Legal}>
+          <TabContent title={LEGAL.title} isActive={tab === HelpModalTabs.Legal}>
             {LEGAL.desc}
           </TabContent>
         </div>
